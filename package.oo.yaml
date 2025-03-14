@@ -1,0 +1,6 @@
+version: 0.0.1
+icon: ./icon.png
+scripts:
+  bootstrap: |
+    pip install --upgrade pip
+    pip install -r requirements.txt
