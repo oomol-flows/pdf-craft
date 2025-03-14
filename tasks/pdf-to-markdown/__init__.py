@@ -29,7 +29,7 @@ def main(params: Inputs, context: Context) -> Outputs:
   if output_file is None:
     output_file = os.path.join(
       context.session_dir,
-      context.job_id,
+      f"{context.job_id}.md",
     )
 
   extractor = PDFPageExtractor(
