@@ -16,6 +16,7 @@ from oocana import Context
 from tempfile import mkdtemp
 from pdf_craft import PDFPageExtractor, MarkDownWriter
 
+
 def main(params: Inputs, context: Context) -> Outputs:
   pdf_path = params["pdf"]
   model_dir = params["model_dir"]
@@ -24,6 +25,7 @@ def main(params: Inputs, context: Context) -> Outputs:
 
   if model_dir is None:
     model_dir = mkdtemp()
+
   if output_file is None:
     output_file = os.path.join(
       context.session_dir,

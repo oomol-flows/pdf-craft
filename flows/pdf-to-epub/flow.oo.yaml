@@ -1,0 +1,4 @@
+nodes:
+  - task: self::analyse_pdf
+    title: Analyse PDF
+    node_id: analyse_pdf#1

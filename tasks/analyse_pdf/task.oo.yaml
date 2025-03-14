@@ -1,0 +1,49 @@
+inputs_def:
+  - handle: pdf
+    description: Input
+    json_schema:
+      type: string
+      ui:widget: file
+  - handle: device
+    json_schema:
+      enum:
+        - cpu
+        - cuda
+      ui:options:
+        labels:
+          - CPU
+          - CUDA
+    value: cuda
+  - handle: model_dir
+    json_schema:
+      type: string
+      ui:widget: dir
+    nullable: true
+    value:
+  - handle: analysing_dir
+    json_schema:
+      type: string
+      ui:widget: dir
+    nullable: true
+    value:
+  - handle: output_dir
+    json_schema:
+      type: string
+      ui:widget: dir
+    nullable: true
+    value:
+outputs_def:
+  - handle: output_dir
+    description: Output
+    json_schema:
+      type: string
+      ui:widget: dir
+ui:
+  default_width: 450
+executor:
+  name: python
+  options:
+    spawn: false
+    entry: __init__.py
+title: Analyse PDF
+icon: ":fa6-solid:file-pdf:#F14C4C:"

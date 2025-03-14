@@ -4,13 +4,12 @@ nodes:
     node_id: pdf-to-markdown#2
     inputs_from:
       - handle: pdf
-        value: /oomol-driver/downloads/citation.pdf
       - handle: device
         value: cuda
       - handle: model_dir
-        value: /oomol-driver/oomol-storage/pdf-craft/models
+        value:
       - handle: output_file
-        value: /oomol-driver/oomol-storage/pdf-craft/output.md
+        value:
       - handle: assets_dir_name
         value: images
   - task: oomol-preview::markdown_file_preview
@@ -21,3 +20,5 @@ nodes:
         from_node:
           - node_id: pdf-to-markdown#2
             output_handle: output_file
+icon: ":twemoji:bookmark-tabs:"
+title: ""
