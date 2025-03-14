@@ -13,7 +13,7 @@ nodes:
       - handle: assets_dir_name
         value: images
   - task: oomol-preview::markdown_file_preview
-    title: "Markdown preview (with file) #2"
+    title: "Markdown preview (with file)"
     node_id: markdown_file_preview#2
     inputs_from:
       - handle: file_path

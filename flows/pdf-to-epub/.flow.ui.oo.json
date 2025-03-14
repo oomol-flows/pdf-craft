@@ -1,10 +1,19 @@
 {
   "nodes": {
     "analyse_pdf#1": {
-      "contentWidth": 450,
+      "contentWidth": 450.32968682966253,
       "rfNode": {
         "position": {
           "x": -69.23520205699586,
+          "y": 205.1691003856867
+        }
+      }
+    },
+    "generate_epub#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": 467.65324634550495,
           "y": 205.1691003856867
         }
       }

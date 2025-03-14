@@ -1,0 +1,27 @@
+inputs_def:
+  - handle: analysed_dir
+    description: Input
+    json_schema:
+      type: string
+      ui:widget: dir
+  - handle: epub_file_path
+    json_schema:
+      type: string
+      ui:widget: save
+    nullable: true
+    value:
+outputs_def:
+  - handle: epub_file_path
+    description: Output
+    json_schema:
+      type: string
+      ui:widget: save
+ui:
+  default_width: 450
+executor:
+  name: python
+  options:
+    spawn: false
+    entry: __init__.py
+title: Generate EPUB
+icon: ":twemoji:blue-book:"
