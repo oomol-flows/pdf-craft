@@ -5,12 +5,14 @@ class Inputs(typing.TypedDict):
   device: typing.Literal["cpu", "cuda"]
   model_dir: typing.Optional[str]
   analysing_dir: typing.Optional[str]
+  clean_analysing_dir: bool
   output_dir: typing.Optional[str]
 class Outputs(typing.TypedDict):
   output_dir: str
 #endregion
 
 import os
+import shutil
 
 from oocana import Context
 from tempfile import mkdtemp
@@ -31,6 +33,8 @@ def main(params: Inputs, context: Context) -> Outputs:
 
   if analysing_dir is None:
     analysing_dir = mkdtemp()
+  elif params["clean_analysing_dir"]:
+    shutil.rmtree(analysing_dir)
 
   if output_dir is None:
     output_dir = os.path.join(

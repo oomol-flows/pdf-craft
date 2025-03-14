@@ -18,20 +18,24 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: dir
-    nullable: true
     value:
+    nullable: true
   - handle: analysing_dir
     json_schema:
       type: string
       ui:widget: dir
-    nullable: true
     value:
+    nullable: true
+  - handle: clean_analysing_dir
+    json_schema:
+      type: boolean
+    value: true
   - handle: output_dir
     json_schema:
       type: string
       ui:widget: dir
-    nullable: true
     value:
+    nullable: true
 outputs_def:
   - handle: output_dir
     description: Output
@@ -39,7 +43,7 @@ outputs_def:
       type: string
       ui:widget: dir
 ui:
-  default_width: 450
+  default_width: 533.6117326279499
 executor:
   name: python
   options:

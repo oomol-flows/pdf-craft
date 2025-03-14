@@ -2,3 +2,16 @@ nodes:
   - task: self::analyse_pdf
     title: Analyse PDF
     node_id: analyse_pdf#1
+    inputs_from:
+      - handle: model_dir
+        value:
+      - handle: analysing_dir
+        value:
+      - handle: output_dir
+        value: /oomol-driver/oomol-storage/pdf-craft/output
+      - handle: device
+        value: cuda
+      - handle: pdf
+        value: /oomol-driver/downloads/citation.pdf
+      - handle: clean_analysing_dir
+        value: true
