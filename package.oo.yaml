@@ -4,3 +4,9 @@ scripts:
   bootstrap: |
     pip install --upgrade pip
     pip install -r requirements.txt
+    if command -v nvidia-smi &> /dev/null; then
+      pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+    fi
+dependencies:
+  llm: 0.1.5
+  oomol-preview: 0.0.2

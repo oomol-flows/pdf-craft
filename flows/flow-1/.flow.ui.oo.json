@@ -1,0 +1,21 @@
+{
+  "nodes": {
+    "LLM#1": {
+      "rfNode": {
+        "position": {
+          "x": 220,
+          "y": 111
+        }
+      }
+    },
+    "markdown_text_preview#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": 698.3905228758169,
+          "y": 111
+        }
+      }
+    }
+  }
+}
