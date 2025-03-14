@@ -1,0 +1,26 @@
+nodes:
+  - task: self::analyse_pdf
+    title: Analyse PDF
+    node_id: analyse_pdf#1
+    inputs_from:
+      - handle: model_dir
+        value:
+      - handle: analysing_dir
+        value:
+      - handle: output_dir
+        value:
+      - handle: device
+        value: cuda
+      - handle: pdf
+      - handle: clean_analysing_dir
+        value: true
+  - task: self::generate_epub
+    title: Generate EPUB
+    node_id: generate_epub#1
+    inputs_from:
+      - handle: epub_file_path
+        value:
+      - handle: analysed_dir
+        from_node:
+          - node_id: analyse_pdf#1
+            output_handle: output_dir

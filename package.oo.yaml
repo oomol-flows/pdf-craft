@@ -2,5 +2,12 @@ version: 0.0.1
 icon: ./icon.png
 scripts:
   bootstrap: |
+    sudo apt-get update
+    sudo apt-get install -y python3-opencv
     pip install --upgrade pip
     pip install -r requirements.txt
+    if command -v nvidia-smi &> /dev/null; then
+      pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+    fi
+dependencies:
+  oomol-preview: 0.0.2

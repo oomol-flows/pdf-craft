@@ -1,0 +1,24 @@
+nodes:
+  - task: self::pdf-to-markdown
+    title: PDF to Markdown
+    node_id: pdf-to-markdown#2
+    inputs_from:
+      - handle: pdf
+      - handle: device
+        value: cuda
+      - handle: model_dir
+        value:
+      - handle: output_file
+        value:
+      - handle: assets_dir_name
+        value: images
+  - task: oomol-preview::markdown_file_preview
+    title: "Markdown preview (with file)"
+    node_id: markdown_file_preview#2
+    inputs_from:
+      - handle: file_path
+        from_node:
+          - node_id: pdf-to-markdown#2
+            output_handle: output_file
+icon: ":twemoji:bookmark-tabs:"
+title: ""

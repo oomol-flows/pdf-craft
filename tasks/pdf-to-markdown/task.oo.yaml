@@ -1,0 +1,47 @@
+inputs_def:
+  - handle: pdf
+    description: Input
+    json_schema:
+      type: string
+      ui:widget: file
+  - handle: device
+    json_schema:
+      enum:
+        - cpu
+        - cuda
+      ui:options:
+        labels:
+          - CPU
+          - CUDA
+    value: cuda
+  - handle: model_dir
+    json_schema:
+      type: string
+      ui:widget: dir
+    nullable: true
+    value:
+  - handle: output_file
+    json_schema:
+      type: string
+      ui:widget: save
+    nullable: true
+    value:
+  - handle: assets_dir_name
+    json_schema:
+      type: string
+    value: images
+outputs_def:
+  - handle: output_file
+    description: Output
+    json_schema:
+      type: string
+      ui:widget: save
+ui:
+  default_width: 456.2563288935522
+executor:
+  name: python
+  options:
+    spawn: false
+    entry: __init__.py
+title: PDF to Markdown
+icon: ":twemoji:bookmark-tabs:"
