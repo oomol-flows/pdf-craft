@@ -41,6 +41,7 @@ def main(params: Inputs, context: Context) -> Outputs:
       context.session_dir,
       context.job_id,
     )
+    os.makedirs(output_dir, exist_ok=True)
 
   reporter = _Reporter(context)
   llm = LLM(
