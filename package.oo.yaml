@@ -11,3 +11,9 @@ scripts:
     fi
 dependencies:
   oomol-preview: 0.0.2
+name: pdf-craft
+repository: https://github.com/oomol-flows/pdf-craft
+releaseNotes: init the first version.
+displayName: PDF craft
+description: "PDF craft is a project that converts scanned PDF books into
+  Markdown or EPUB formats using local AI "
