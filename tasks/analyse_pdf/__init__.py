@@ -22,7 +22,7 @@ from pdf_craft import analyse, LLM, PDFPageExtractor, AnalysingStep
 def main(params: Inputs, context: Context) -> Outputs:
   env = context.oomol_llm_env
   key: str = env["api_key"]
-  base_url: str = env["base_url"]
+  base_url: str = env["base_url_v1"]
   model: str = "oomol-chat" # 临时方案，先写死
   model_dir = params["model_dir"]
   analysing_dir = params["analysing_dir"]
@@ -46,7 +46,7 @@ def main(params: Inputs, context: Context) -> Outputs:
   reporter = _Reporter(context)
   llm = LLM(
     key=key,
-    url=f"{base_url}/v1",
+    url=base_url,
     model=model,
     token_encoding="o200k_base",
   )
@@ -90,7 +90,7 @@ class _Reporter:
       self._offset_progresses.append(sum_weight)
       self._delta_progresses.append(weight)
       sum_weight += weight
-    
+
     for i in range(len(self._steps)):
       self._offset_progresses[i] /= sum_weight
       self._delta_progresses[i] /= sum_weight
