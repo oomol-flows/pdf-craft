@@ -2,6 +2,8 @@
 
 This repo is a wrapper of the pdf-craft project of the same name.
 
+[![About PDF craft](./docs/images/youtube.png)](https://www.youtube.com/watch?v=EpaLC71gPpM)
+
 ## Introduction
 
 PDF craft can convert PDF files into various other formats. This project will focus on processing PDF files of scanned books. The project has just started. If you encounter any problems or have any suggestions, please submit [issues](https://github.com/oomol-lab/pdf-craft/issues).
