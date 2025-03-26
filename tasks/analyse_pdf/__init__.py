@@ -1,14 +1,14 @@
 #region generated meta
 import typing
 class Inputs(typing.TypedDict):
-  pdf: str
-  device: typing.Literal["cpu", "cuda"]
-  model_dir: typing.Optional[str]
-  analysing_dir: typing.Optional[str]
-  clean_analysing_dir: bool
-  output_dir: typing.Optional[str]
+    pdf: str
+    device: typing.Literal["cpu", "cuda"]
+    model_dir: str | None
+    analysing_dir: str | None
+    clean_analysing_dir: bool
+    output_dir: str | None
 class Outputs(typing.TypedDict):
-  output_dir: str
+    output_dir: str
 #endregion
 
 import os
