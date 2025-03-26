@@ -15,6 +15,10 @@ nodes:
       - handle: pdf
       - handle: clean_analysing_dir
         value: true
+      - handle: retry_times
+        value: 5
+      - handle: retry_interval_seconds
+        value: 1.5
   - task: self::generate_epub
     title: Generate EPUB
     node_id: generate_epub#1

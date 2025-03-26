@@ -1,1 +1,1 @@
-pdf-craft==0.0.9
+pdf-craft==0.0.12

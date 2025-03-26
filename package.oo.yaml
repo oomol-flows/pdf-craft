@@ -1,4 +1,4 @@
-version: 0.0.3
+version: 0.0.4
 icon: ./icon.png
 scripts:
   bootstrap: |
@@ -10,10 +10,10 @@ scripts:
       pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
     fi
 dependencies:
-  oomol-preview: 0.0.2
+  oomol-preview: 0.0.3
 name: pdf-craft
 repository: https://github.com/oomol-flows/pdf-craft
-releaseNotes: upgrade dependencies to fix bugs.
+releaseNotes: add retry fields & fix bugs.
 displayName: PDF craft
 description: PDF craft is a project that converts scanned PDF books into
   Markdown or EPUB formats using local AI.

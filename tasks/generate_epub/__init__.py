@@ -1,10 +1,10 @@
 #region generated meta
 import typing
 class Inputs(typing.TypedDict):
-  analysed_dir: str
-  epub_file_path: typing.Optional[str]
+    analysed_dir: str
+    epub_file_path: str | None
 class Outputs(typing.TypedDict):
-  epub_file_path: str
+    epub_file_path: str
 #endregion
 
 import os
