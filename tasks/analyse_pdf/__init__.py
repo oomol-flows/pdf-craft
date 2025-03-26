@@ -6,6 +6,8 @@ class Inputs(typing.TypedDict):
     model_dir: str | None
     analysing_dir: str | None
     clean_analysing_dir: bool
+    retry_times: int
+    retry_interval_seconds: float
     output_dir: str | None
 class Outputs(typing.TypedDict):
     output_dir: str
@@ -23,7 +25,7 @@ def main(params: Inputs, context: Context) -> Outputs:
   env = context.oomol_llm_env
   key: str = env["api_key"]
   base_url: str = env["base_url_v1"]
-  model: str = "oomol-chat" # 临时方案，先写死
+  model: str = "oomol-chat" # TODO: 临时方案，先写死
   model_dir = params["model_dir"]
   analysing_dir = params["analysing_dir"]
   output_dir = params["output_dir"]
@@ -49,6 +51,8 @@ def main(params: Inputs, context: Context) -> Outputs:
     url=base_url,
     model=model,
     token_encoding="o200k_base",
+    retry_times=int(params["retry_times"]),
+    retry_interval_seconds=params["retry_interval_seconds"],
   )
   pdf_page_extractor = PDFPageExtractor(
     device=params["device"],

@@ -30,6 +30,16 @@ inputs_def:
     json_schema:
       type: boolean
     value: true
+  - handle: retry_times
+    json_schema:
+      type: integer
+      minimum: 0
+    value: 5
+  - handle: retry_interval_seconds
+    json_schema:
+      type: number
+      minimum: 0
+    value: 1.5
   - handle: output_dir
     json_schema:
       type: string
