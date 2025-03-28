@@ -5,8 +5,6 @@ class Inputs(typing.TypedDict):
     device: typing.Literal["cpu", "cuda"]
     model_dir: str | None
     ocr_level: typing.Literal["once", "once_per_layout"]
-    analysing_dir: str | None
-    clean_analysing_dir: bool
     retry_times: int
     retry_interval_seconds: float
     output_dir: str | None
@@ -20,6 +18,7 @@ import shutil
 from oocana import Context
 from tempfile import mkdtemp
 from pdf_craft import analyse, LLM, OCRLevel, PDFPageExtractor, AnalysingStep
+from .cache import get_analysing_dir
 
 
 def main(params: Inputs, context: Context) -> Outputs:
@@ -27,18 +26,13 @@ def main(params: Inputs, context: Context) -> Outputs:
   key: str = env["api_key"]
   base_url: str = env["base_url_v1"]
   model: str = "oomol-chat" # TODO: 临时方案，先写死
+  pdf_path = params["pdf"]
   model_dir = params["model_dir"]
   ocr_level_value = params["ocr_level"]
-  analysing_dir = params["analysing_dir"]
   output_dir = params["output_dir"]
 
   if model_dir is None:
     model_dir = mkdtemp()
-
-  if analysing_dir is None:
-    analysing_dir = mkdtemp()
-  elif params["clean_analysing_dir"]:
-    shutil.rmtree(analysing_dir)
 
   if output_dir is None:
     output_dir = os.path.join(
@@ -72,8 +66,8 @@ def main(params: Inputs, context: Context) -> Outputs:
   analyse(
     llm=llm,
     pdf_page_extractor=pdf_page_extractor,
-    pdf_path=params["pdf"],
-    analysing_dir_path=analysing_dir,
+    pdf_path=pdf_path,
+    analysing_dir_path=get_analysing_dir(context, pdf_path),
     output_dir_path=output_dir,
     report_step=reporter.report_step,
     report_progress=reporter.report_progress,

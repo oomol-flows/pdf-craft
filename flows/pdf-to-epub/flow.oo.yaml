@@ -6,15 +6,11 @@ nodes:
     inputs_from:
       - handle: model_dir
         value:
-      - handle: analysing_dir
-        value:
       - handle: output_dir
         value:
       - handle: device
         value: cuda
       - handle: pdf
-      - handle: clean_analysing_dir
-        value: true
       - handle: retry_times
         value: 5
       - handle: retry_interval_seconds
