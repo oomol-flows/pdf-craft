@@ -13,7 +13,7 @@ class Outputs(typing.TypedDict):
 #endregion
 
 import os
-import shutil
+import torch
 
 from oocana import Context
 from tempfile import mkdtemp
@@ -49,6 +49,11 @@ def main(params: Inputs, context: Context) -> Outputs:
   else:
     raise ValueError(f"ocr_level: {ocr_level_value} is not supported")
 
+  device = params["device"]
+  if device == "cuda" and not torch.cuda.is_available():
+    device = "cpu"
+    print("Warn: cuda is not available, use cpu instead")
+
   reporter = _Reporter(context)
   llm = LLM(
     key=key,
@@ -59,7 +64,7 @@ def main(params: Inputs, context: Context) -> Outputs:
     retry_interval_seconds=params["retry_interval_seconds"],
   )
   pdf_page_extractor = PDFPageExtractor(
-    device=params["device"],
+    device=device,
     ocr_level=ocr_level,
     model_dir_path=model_dir,
   )
