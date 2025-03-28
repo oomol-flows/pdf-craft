@@ -19,6 +19,8 @@ nodes:
         value: 5
       - handle: retry_interval_seconds
         value: 1.5
+      - handle: ocr_level
+        value: once
   - task: self::generate_epub
     title: Generate EPUB
     node_id: generate_epub#1

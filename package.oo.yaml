@@ -8,6 +8,9 @@ scripts:
     pip install -r requirements.txt
     if command -v nvidia-smi &> /dev/null; then
       pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+      pip install onnxruntime-gpu==1.21.0 # 临时方案，等待修复 https://github.com/oomol-lab/pdf-craft/issues/85
+    else
+      pip install onnxruntime==1.21.0
     fi
 dependencies:
   oomol-preview: 0.0.3

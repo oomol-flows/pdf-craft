@@ -4,6 +4,7 @@ class Inputs(typing.TypedDict):
     pdf: str
     device: typing.Literal["cpu", "cuda"]
     model_dir: str | None
+    ocr_level: typing.Literal["once", "once_per_layout"]
     analysing_dir: str | None
     clean_analysing_dir: bool
     retry_times: int
@@ -18,7 +19,7 @@ import shutil
 
 from oocana import Context
 from tempfile import mkdtemp
-from pdf_craft import analyse, LLM, PDFPageExtractor, AnalysingStep
+from pdf_craft import analyse, LLM, OCRLevel, PDFPageExtractor, AnalysingStep
 
 
 def main(params: Inputs, context: Context) -> Outputs:
@@ -27,6 +28,7 @@ def main(params: Inputs, context: Context) -> Outputs:
   base_url: str = env["base_url_v1"]
   model: str = "oomol-chat" # TODO: 临时方案，先写死
   model_dir = params["model_dir"]
+  ocr_level_value = params["ocr_level"]
   analysing_dir = params["analysing_dir"]
   output_dir = params["output_dir"]
 
@@ -45,6 +47,14 @@ def main(params: Inputs, context: Context) -> Outputs:
     )
     os.makedirs(output_dir, exist_ok=True)
 
+  ocr_level: OCRLevel
+  if ocr_level_value == "once":
+    ocr_level = OCRLevel.Once
+  elif ocr_level_value == "once_per_layout":
+    ocr_level = OCRLevel.OncePerLayout
+  else:
+    raise ValueError(f"ocr_level: {ocr_level_value} is not supported")
+
   reporter = _Reporter(context)
   llm = LLM(
     key=key,
@@ -56,6 +66,7 @@ def main(params: Inputs, context: Context) -> Outputs:
   )
   pdf_page_extractor = PDFPageExtractor(
     device=params["device"],
+    ocr_level=ocr_level,
     model_dir_path=model_dir,
   )
   analyse(
