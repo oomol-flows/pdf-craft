@@ -1,44 +1,42 @@
 #region generated meta
 import typing
+class LLMModelOptions(typing.TypedDict):
+    model: str
+    temperature: float
+    top_p: float
+    max_tokens: int
 class Inputs(typing.TypedDict):
     pdf: str
     device: typing.Literal["cpu", "cuda"]
     model_dir: str | None
     ocr_level: typing.Literal["once", "once_per_layout"]
-    analysing_dir: str | None
-    clean_analysing_dir: bool
     retry_times: int
     retry_interval_seconds: float
     output_dir: str | None
+    llm: LLMModelOptions
 class Outputs(typing.TypedDict):
     output_dir: str
 #endregion
 
 import os
-import shutil
+import torch
 
 from oocana import Context
 from tempfile import mkdtemp
 from pdf_craft import analyse, LLM, OCRLevel, PDFPageExtractor, AnalysingStep
+from .cache import get_analysing_dir
 
 
 def main(params: Inputs, context: Context) -> Outputs:
   env = context.oomol_llm_env
-  key: str = env["api_key"]
-  base_url: str = env["base_url_v1"]
-  model: str = "oomol-chat" # TODO: 临时方案，先写死
+  pdf_path = params["pdf"]
   model_dir = params["model_dir"]
   ocr_level_value = params["ocr_level"]
-  analysing_dir = params["analysing_dir"]
   output_dir = params["output_dir"]
+  llm_model = params["llm"]
 
   if model_dir is None:
     model_dir = mkdtemp()
-
-  if analysing_dir is None:
-    analysing_dir = mkdtemp()
-  elif params["clean_analysing_dir"]:
-    shutil.rmtree(analysing_dir)
 
   if output_dir is None:
     output_dir = os.path.join(
@@ -55,25 +53,31 @@ def main(params: Inputs, context: Context) -> Outputs:
   else:
     raise ValueError(f"ocr_level: {ocr_level_value} is not supported")
 
+  device = params["device"]
+  if device == "cuda" and not torch.cuda.is_available():
+    device = "cpu"
+    print("Warn: cuda is not available, use cpu instead")
+
   reporter = _Reporter(context)
   llm = LLM(
-    key=key,
-    url=base_url,
-    model=model,
+    key=env["api_key"],
+    url=env["base_url_v1"],
+    model=llm_model["model"],
+    temperature=float(llm_model["temperature"]),
     token_encoding="o200k_base",
     retry_times=int(params["retry_times"]),
     retry_interval_seconds=params["retry_interval_seconds"],
   )
   pdf_page_extractor = PDFPageExtractor(
-    device=params["device"],
+    device=device,
     ocr_level=ocr_level,
     model_dir_path=model_dir,
   )
   analyse(
     llm=llm,
     pdf_page_extractor=pdf_page_extractor,
-    pdf_path=params["pdf"],
-    analysing_dir_path=analysing_dir,
+    pdf_path=pdf_path,
+    analysing_dir_path=get_analysing_dir(context, pdf_path),
     output_dir_path=output_dir,
     report_step=reporter.report_step,
     report_progress=reporter.report_progress,

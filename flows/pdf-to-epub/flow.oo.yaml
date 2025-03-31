@@ -6,21 +6,23 @@ nodes:
     inputs_from:
       - handle: model_dir
         value:
-      - handle: analysing_dir
-        value:
       - handle: output_dir
         value:
       - handle: device
         value: cuda
       - handle: pdf
-      - handle: clean_analysing_dir
-        value: true
       - handle: retry_times
         value: 5
       - handle: retry_interval_seconds
         value: 1.5
       - handle: ocr_level
         value: once
+      - handle: llm
+        value:
+          model: deepseek-chat
+          temperature: 1
+          top_p: 0.8
+          max_tokens: 4096
   - task: self::generate_epub
     title: Generate EPUB
     node_id: generate_epub#1

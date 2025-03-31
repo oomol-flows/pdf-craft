@@ -21,6 +21,10 @@ def main(params: Inputs, context: Context) -> Outputs:
       context.session_dir,
       f"{context.job_id}.epub",
     )
+
+  epub_dir_path = os.path.dirname(epub_file_path)
+  os.makedirs(epub_dir_path, exist_ok=True)
+
   generate_epub_file(
     from_dir_path=analysed_dir,
     epub_file_path=epub_file_path,
