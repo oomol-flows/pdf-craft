@@ -5,7 +5,7 @@ from oocana import Context
 
 
 def get_analysing_dir(context: Context, pdf_path: str):
-  cache_path = os.path.join(context.tmp_dir, "pdf-craft", context.node_id)
+  cache_path = os.path.join(context.tmp_pkg_dir, context.node_id)
   pdf_hash = _calculate_sha512(pdf_path)
   return os.path.join(cache_path, pdf_hash)
 
