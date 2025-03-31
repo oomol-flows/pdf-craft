@@ -46,6 +46,16 @@ inputs_def:
       ui:widget: dir
     value:
     nullable: true
+  - handle: llm
+    json_schema:
+      ui:options:
+        title: Model
+      ui:widget: llm::model
+    value:
+      model: deepseek-chat
+      temperature: 1
+      top_p: 0.8
+      max_tokens: 4096
 outputs_def:
   - handle: output_dir
     description: Output

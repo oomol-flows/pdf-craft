@@ -17,6 +17,12 @@ nodes:
         value: 1.5
       - handle: ocr_level
         value: once
+      - handle: llm
+        value:
+          model: deepseek-chat
+          temperature: 1
+          top_p: 0.8
+          max_tokens: 4096
   - task: self::generate_epub
     title: Generate EPUB
     node_id: generate_epub#1

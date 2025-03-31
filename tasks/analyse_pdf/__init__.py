@@ -1,5 +1,10 @@
 #region generated meta
 import typing
+class LLMModelOptions(typing.TypedDict):
+    model: str
+    temperature: float
+    top_p: float
+    max_tokens: int
 class Inputs(typing.TypedDict):
     pdf: str
     device: typing.Literal["cpu", "cuda"]
@@ -8,6 +13,7 @@ class Inputs(typing.TypedDict):
     retry_times: int
     retry_interval_seconds: float
     output_dir: str | None
+    llm: LLMModelOptions
 class Outputs(typing.TypedDict):
     output_dir: str
 #endregion
@@ -23,13 +29,11 @@ from .cache import get_analysing_dir
 
 def main(params: Inputs, context: Context) -> Outputs:
   env = context.oomol_llm_env
-  key: str = env["api_key"]
-  base_url: str = env["base_url_v1"]
-  model: str = "oomol-chat" # TODO: 临时方案，先写死
   pdf_path = params["pdf"]
   model_dir = params["model_dir"]
   ocr_level_value = params["ocr_level"]
   output_dir = params["output_dir"]
+  llm_model = params["llm"]
 
   if model_dir is None:
     model_dir = mkdtemp()
@@ -56,9 +60,10 @@ def main(params: Inputs, context: Context) -> Outputs:
 
   reporter = _Reporter(context)
   llm = LLM(
-    key=key,
-    url=base_url,
-    model=model,
+    key=env["api_key"],
+    url=env["base_url_v1"],
+    model=llm_model["model"],
+    temperature=float(llm_model["temperature"]),
     token_encoding="o200k_base",
     retry_times=int(params["retry_times"]),
     retry_interval_seconds=params["retry_interval_seconds"],
