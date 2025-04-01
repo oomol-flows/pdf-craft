@@ -29,7 +29,7 @@ inputs_def:
         labels:
           - Once
           - Once per Layout
-    value: Once
+    value: once
   - handle: retry_times
     json_schema:
       type: integer
