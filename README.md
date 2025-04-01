@@ -1,5 +1,7 @@
 # PDF craft
 
+[![Open in OOMOL Studio](https://static.oomol.com/assets/button.svg)](https://hub.oomol.com/package/pdf-craft-starter?open=true)
+
 This repo is a wrapper of the pdf-craft project of the same name.
 
 [![About PDF craft](./docs/images/youtube.png)](https://www.youtube.com/watch?v=EpaLC71gPpM)
