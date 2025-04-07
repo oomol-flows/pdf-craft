@@ -1,4 +1,5 @@
 #region generated meta
+from math import ceil
 import typing
 class LLMModelOptions(typing.TypedDict):
     model: str
@@ -10,6 +11,7 @@ class Inputs(typing.TypedDict):
     device: typing.Literal["cpu", "cuda"]
     model_dir: str | None
     ocr_level: typing.Literal["once", "once_per_layout"]
+    window_tokens: int | None
     retry_times: int
     retry_interval_seconds: float
     output_dir: str | None
@@ -37,6 +39,10 @@ def main(params: Inputs, context: Context) -> Outputs:
 
   if model_dir is None:
     model_dir = mkdtemp()
+
+  window_tokens = params["window_tokens"]
+  if window_tokens is not None:
+    window_tokens = ceil(window_tokens)
 
   if output_dir is None:
     output_dir = os.path.join(
@@ -80,6 +86,7 @@ def main(params: Inputs, context: Context) -> Outputs:
     pdf_path=pdf_path,
     analysing_dir_path=get_analysing_dir(context, pdf_path),
     output_dir_path=output_dir,
+    window_tokens=window_tokens,
     report_step=reporter.report_step,
     report_progress=reporter.report_progress,
   )

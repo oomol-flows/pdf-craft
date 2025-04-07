@@ -33,6 +33,11 @@ inputs_def:
           - Once per Layout
     value: once
     nullable: false
+  - handle: window_tokens
+    json_schema:
+      type: integer
+    nullable: true
+    value:
   - handle: retry_times
     json_schema:
       type: integer
@@ -67,7 +72,7 @@ outputs_def:
       type: string
       ui:widget: dir
 ui:
-  default_width: 533.6117326279499
+  default_width: 575.9100785537335
 executor:
   name: python
   options:

@@ -23,6 +23,8 @@ nodes:
           temperature: 1
           top_p: 0.8
           max_tokens: 4096
+      - handle: window_tokens
+        value:
   - task: self::generate_epub
     title: Generate EPUB
     node_id: generate_epub#1
