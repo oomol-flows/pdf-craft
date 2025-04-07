@@ -6,9 +6,10 @@
   <p><a href="https://hub.oomol.com/package/pdf-craft-starter?open=true" target="_blank"><img src="https://static.oomol.com/assets/button.svg" alt="Open in OOMOL Studio" /></a></p>
 </div>
 
+[![About PDF craft](./docs/images/youtube.png)](https://www.youtube.com/watch?v=EpaLC71gPpM)
+
 An [OOMOL](https://hub.oomol.com/) Package that provides visual Blocks for using the [pdf-craft](https://github.com/oomol-lab/pdf-craft) project.
 
-[![About PDF craft](./docs/images/youtube.png)](https://www.youtube.com/watch?v=EpaLC71gPpM)
 
 ## Introduction
 
