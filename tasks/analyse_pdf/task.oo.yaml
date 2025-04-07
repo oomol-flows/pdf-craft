@@ -4,6 +4,7 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: file
+    nullable: false
   - handle: device
     json_schema:
       enum:
@@ -14,6 +15,7 @@ inputs_def:
           - CPU
           - CUDA
     value: cuda
+    nullable: false
   - handle: model_dir
     json_schema:
       type: string
@@ -30,21 +32,23 @@ inputs_def:
           - Once
           - Once per Layout
     value: once
+    nullable: false
   - handle: retry_times
     json_schema:
       type: integer
       minimum: 0
     value: 5
+    nullable: false
   - handle: retry_interval_seconds
     json_schema:
       type: number
       minimum: 0
     value: 1.5
+    nullable: false
   - handle: output_dir
     json_schema:
       type: string
       ui:widget: dir
-    value:
     nullable: true
   - handle: llm
     json_schema:

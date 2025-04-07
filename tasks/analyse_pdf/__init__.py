@@ -63,6 +63,7 @@ def main(params: Inputs, context: Context) -> Outputs:
     key=env["api_key"],
     url=env["base_url_v1"],
     model=llm_model["model"],
+    top_p=float(llm_model["top_p"]),
     temperature=float(llm_model["temperature"]),
     token_encoding="o200k_base",
     retry_times=int(params["retry_times"]),
