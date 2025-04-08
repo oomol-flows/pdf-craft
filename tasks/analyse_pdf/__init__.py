@@ -1,5 +1,4 @@
 #region generated meta
-from math import ceil
 import typing
 class LLMModelOptions(typing.TypedDict):
     model: str
@@ -23,6 +22,7 @@ class Outputs(typing.TypedDict):
 import os
 import torch
 
+from math import ceil
 from oocana import Context
 from tempfile import mkdtemp
 from pdf_craft import analyse, LLM, OCRLevel, PDFPageExtractor, AnalysingStep
