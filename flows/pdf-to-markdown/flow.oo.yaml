@@ -12,6 +12,8 @@ nodes:
         value:
       - handle: assets_dir_name
         value: images
+      - handle: ocr_level
+        value: once
   - task: oomol-preview::markdown_file_preview
     title: "Markdown preview (with file)"
     node_id: markdown_file_preview#2
