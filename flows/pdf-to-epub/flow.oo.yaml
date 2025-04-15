@@ -25,6 +25,10 @@ nodes:
           max_tokens: 4096
       - handle: window_tokens
         value:
+      - handle: extract_formula
+        value: false
+      - handle: extract_table
+        value: false
   - task: self::generate_epub
     title: Generate EPUB
     node_id: generate_epub#1
@@ -35,3 +39,7 @@ nodes:
         from_node:
           - node_id: analyse_pdf#1
             output_handle: output_dir
+      - handle: latex_render
+        value: clipping
+      - handle: table_render
+        value: clipping

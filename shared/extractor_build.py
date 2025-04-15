@@ -2,18 +2,24 @@ import torch
 
 from typing import TypedDict, Literal
 from tempfile import mkdtemp
-from pdf_craft import OCRLevel, PDFPageExtractor
+from pdf_craft import OCRLevel, PDFPageExtractor, ExtractedTableFormat
 
 
 class BuildParams(TypedDict):
   device: Literal["cpu", "cuda"]
   model_dir: str | None
   ocr_level: Literal["once", "once_per_layout"]
+  extract_formula: bool
 
-def build_extractor(params: BuildParams) -> PDFPageExtractor:
+def build_extractor(
+    params: BuildParams,
+    extract_table_format: ExtractedTableFormat | None = None,
+  ) -> PDFPageExtractor:
+
   device = params["device"]
   model_dir: str | None = params["model_dir"]
   ocr_level_value = params["ocr_level"]
+  extract_formula = params["extract_formula"]
 
   if model_dir is None:
     model_dir = mkdtemp()
@@ -34,4 +40,6 @@ def build_extractor(params: BuildParams) -> PDFPageExtractor:
     device=device,
     ocr_level=ocr_level,
     model_dir_path=model_dir,
+    extract_formula=extract_formula,
+    extract_table_format=extract_table_format,
   )

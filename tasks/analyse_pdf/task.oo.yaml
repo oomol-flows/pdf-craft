@@ -33,11 +33,19 @@ inputs_def:
           - Once per Layout
     value: once
     nullable: false
+  - handle: extract_formula
+    json_schema:
+      type: boolean
+    value: false
+  - handle: extract_table
+    json_schema:
+      type: boolean
+    value: false
   - handle: window_tokens
     json_schema:
       type: integer
-    nullable: true
     value:
+    nullable: true
   - handle: retry_times
     json_schema:
       type: integer

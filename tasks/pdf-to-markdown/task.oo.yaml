@@ -30,6 +30,14 @@ inputs_def:
           - Once
           - Once per Layout
     value: once
+  - handle: extract_formula
+    json_schema:
+      type: boolean
+    value: false
+  - handle: extract_table
+    json_schema:
+      type: boolean
+    value: false
   - handle: output_file
     json_schema:
       type: string

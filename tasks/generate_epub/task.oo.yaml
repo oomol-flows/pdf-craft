@@ -4,12 +4,34 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: dir
+  - handle: latex_render
+    json_schema:
+      enum:
+        - mathml
+        - svg
+        - clipping
+      ui:options:
+        labels:
+          - MathML
+          - SVG
+          - Clipping
+    value: clipping
+  - handle: table_render
+    json_schema:
+      enum:
+        - html
+        - clipping
+      ui:options:
+        labels:
+          - HTML
+          - Clipping
+    value: clipping
   - handle: epub_file_path
     json_schema:
       type: string
       ui:widget: save
-    nullable: true
     value:
+    nullable: true
 outputs_def:
   - handle: epub_file_path
     description: Output
