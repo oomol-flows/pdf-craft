@@ -39,7 +39,7 @@ nodes:
         from_node:
           - node_id: analyse_pdf#1
             output_handle: output_dir
-      - handle: latex_render
-        value: mathml
-      - handle: table_render
-        value: html
+      - handle: render_latex
+        value: true
+      - handle: render_table
+        value: true

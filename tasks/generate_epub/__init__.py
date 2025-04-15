@@ -2,8 +2,8 @@
 import typing
 class Inputs(typing.TypedDict):
     analysed_dir: str
-    latex_render: typing.Literal["mathml", "svg", "clipping"]
-    table_render: typing.Literal["html", "clipping"]
+    render_latex: bool
+    render_table: bool
     epub_file_path: str | None
 class Outputs(typing.TypedDict):
     epub_file_path: str
@@ -16,19 +16,14 @@ from pdf_craft import generate_epub_file, LaTeXRender, TableRender
 
 def main(params: Inputs, context: Context) -> Outputs:
   analysed_dir = params["analysed_dir"]
-  _latex_render = params["latex_render"]
-  _table_render = params["table_render"]
   epub_file_path = params["epub_file_path"]
 
   latex_render: LaTeXRender = LaTeXRender.CLIPPING
   table_render: TableRender = TableRender.CLIPPING
 
-  if _latex_render == "mathml":
+  if params["render_latex"]:
     latex_render = LaTeXRender.MATHML
-  elif _latex_render == "svg":
-    latex_render = LaTeXRender.SVG
-
-  if _table_render == "html":
+  if params["render_table"]:
     table_render = TableRender.HTML
 
   if epub_file_path is None:
