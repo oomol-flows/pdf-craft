@@ -40,6 +40,6 @@ nodes:
           - node_id: analyse_pdf#1
             output_handle: output_dir
       - handle: latex_render
-        value: clipping
+        value: mathml
       - handle: table_render
-        value: clipping
+        value: html
