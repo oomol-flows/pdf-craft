@@ -18,14 +18,24 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: dir
-    nullable: true
     value:
+    nullable: true
+  - handle: ocr_level
+    json_schema:
+      enum:
+        - once
+        - once_per_layout
+      ui:options:
+        labels:
+          - Once
+          - Once per Layout
+    value: once
   - handle: output_file
     json_schema:
       type: string
       ui:widget: save
-    nullable: true
     value:
+    nullable: true
   - handle: assets_dir_name
     json_schema:
       type: string

@@ -4,6 +4,7 @@ class Inputs(typing.TypedDict):
     pdf: str
     device: typing.Literal["cpu", "cuda"]
     model_dir: str | None
+    ocr_level: typing.Literal["once", "once_per_layout"]
     output_file: str | None
     assets_dir_name: str
 class Outputs(typing.TypedDict):
@@ -13,18 +14,15 @@ class Outputs(typing.TypedDict):
 import os
 
 from oocana import Context
-from tempfile import mkdtemp
+from shared import build_extractor
 from pdf_craft import PDFPageExtractor, MarkDownWriter
 
 
 def main(params: Inputs, context: Context) -> Outputs:
   pdf_path = params["pdf"]
-  model_dir = params["model_dir"]
   output_file = params["output_file"]
   assets_dir_name = params["assets_dir_name"]
-
-  if model_dir is None:
-    model_dir = mkdtemp()
+  extractor: PDFPageExtractor = build_extractor(params)
 
   if output_file is None:
     output_file = os.path.join(
@@ -32,10 +30,6 @@ def main(params: Inputs, context: Context) -> Outputs:
       f"{context.job_id}.md",
     )
 
-  extractor = PDFPageExtractor(
-    device=params["device"],
-    model_dir_path=model_dir,
-  )
   with MarkDownWriter(
     md_path=output_file,
     assets_path=assets_dir_name,
