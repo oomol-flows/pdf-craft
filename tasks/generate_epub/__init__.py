@@ -2,6 +2,8 @@
 import typing
 class Inputs(typing.TypedDict):
     analysed_dir: str
+    latex_render: typing.Literal["mathml", "svg", "clipping"]
+    table_render: typing.Literal["html", "clipping"]
     epub_file_path: str | None
 class Outputs(typing.TypedDict):
     epub_file_path: str
@@ -10,11 +12,24 @@ class Outputs(typing.TypedDict):
 import os
 
 from oocana import Context
-from pdf_craft import generate_epub_file
+from pdf_craft import generate_epub_file, LaTeXRender, TableRender
 
 def main(params: Inputs, context: Context) -> Outputs:
   analysed_dir = params["analysed_dir"]
+  _latex_render = params["latex_render"]
+  _table_render = params["table_render"]
   epub_file_path = params["epub_file_path"]
+
+  latex_render: LaTeXRender = LaTeXRender.CLIPPING
+  table_render: TableRender = TableRender.CLIPPING
+
+  if _latex_render == "mathml":
+    latex_render = LaTeXRender.MATHML
+  elif _latex_render == "svg":
+    latex_render = LaTeXRender.SVG
+
+  if _table_render == "html":
+    table_render = TableRender.HTML
 
   if epub_file_path is None:
     epub_file_path = os.path.join(
@@ -28,5 +43,7 @@ def main(params: Inputs, context: Context) -> Outputs:
   generate_epub_file(
     from_dir_path=analysed_dir,
     epub_file_path=epub_file_path,
+    latex_render=latex_render,
+    table_render=table_render,
   )
   return { "epub_file_path": epub_file_path }

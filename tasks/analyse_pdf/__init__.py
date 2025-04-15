@@ -10,6 +10,8 @@ class Inputs(typing.TypedDict):
     device: typing.Literal["cpu", "cuda"]
     model_dir: str | None
     ocr_level: typing.Literal["once", "once_per_layout"]
+    extract_formula: bool
+    extract_table: bool
     window_tokens: int | None
     retry_times: int
     retry_interval_seconds: float
@@ -20,11 +22,10 @@ class Outputs(typing.TypedDict):
 #endregion
 
 import os
-import torch
 
 from math import ceil
 from oocana import Context
-from pdf_craft import analyse, LLM, AnalysingStep
+from pdf_craft import analyse, LLM, AnalysingStep, PDFPageExtractor, ExtractedTableFormat
 from shared import build_extractor
 from .cache import get_analysing_dir
 
@@ -34,6 +35,12 @@ def main(params: Inputs, context: Context) -> Outputs:
   pdf_path = params["pdf"]
   output_dir = params["output_dir"]
   llm_model = params["llm"]
+
+  extract_table_format: ExtractedTableFormat
+  if params["extract_table"]:
+    extract_table_format = ExtractedTableFormat.HTML
+  else:
+    extract_table_format = ExtractedTableFormat.DISABLE
 
   window_tokens = params["window_tokens"]
   if window_tokens is not None:
@@ -46,11 +53,6 @@ def main(params: Inputs, context: Context) -> Outputs:
     )
     os.makedirs(output_dir, exist_ok=True)
 
-  device = params["device"]
-  if device == "cuda" and not torch.cuda.is_available():
-    device = "cpu"
-    print("Warn: cuda is not available, use cpu instead")
-
   reporter = _Reporter(context)
   llm = LLM(
     key=env["api_key"],
@@ -62,10 +64,14 @@ def main(params: Inputs, context: Context) -> Outputs:
     retry_times=int(params["retry_times"]),
     retry_interval_seconds=params["retry_interval_seconds"],
   )
+  extractor: PDFPageExtractor = build_extractor(
+    params=params,
+    extract_table_format=extract_table_format,
+  )
   analyse(
     llm=llm,
     pdf_path=pdf_path,
-    pdf_page_extractor=build_extractor(params),
+    pdf_page_extractor=extractor,
     analysing_dir_path=get_analysing_dir(context, pdf_path),
     output_dir_path=output_dir,
     window_tokens=window_tokens,

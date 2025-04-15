@@ -14,6 +14,10 @@ nodes:
         value: images
       - handle: ocr_level
         value: once
+      - handle: extract_formula
+        value: false
+      - handle: extract_table
+        value: false
   - task: oomol-preview::markdown_file_preview
     title: "Markdown preview (with file)"
     node_id: markdown_file_preview#2
