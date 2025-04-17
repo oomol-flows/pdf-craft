@@ -1,0 +1,28 @@
+name: Update starter
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [release]
+    types:
+      - completed
+
+env:
+  GH_TOKEN: ${{ secrets.ACCESS_REPO }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Get version
+        id: get_version
+        run: |
+          # get version from package.oo.yaml
+          version=$(grep -oP '(?<=^version: ).*' package.oo.yaml)
+          echo "version=$version" >> $GITHUB_ENV
+      - name: trigger starter
+        run: |
+          gh workflow run update-dep -R oomol-flows/pdf-crafter-starter -f pdf-craft=${{ github.action.steps.get_version.outputs.version }}
+          
