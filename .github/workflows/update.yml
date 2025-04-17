@@ -20,9 +20,9 @@ jobs:
         id: get_version
         run: |
           # get version from package.oo.yaml
-          version=$(grep -oP '(?<=^version: ).*' package.oo.yaml)
+          version=$(grep 'version: ' package.oo.yaml | cut -d ' ' -f 2-)
           echo "version=$version" >> $GITHUB_OUTPUT
       - name: trigger starter
         run: |
-          gh workflow run update-dep.yml -R oomol-flows/pdf-craft-starter -f pdf-craft=${{ github.action.steps.get_version.outputs.version }}
+          gh workflow run update-dep.yml -R oomol-flows/pdf-craft-starter -f pdf-craft=${{ steps.get_version.outputs.version }}
           
