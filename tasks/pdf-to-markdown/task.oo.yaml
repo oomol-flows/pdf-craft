@@ -4,7 +4,6 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: file
-    value: /oomol-driver/oomol-storage/pdf/citation.pdf
   - handle: model_dir
     json_schema:
       type: string

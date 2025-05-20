@@ -1,16 +1,19 @@
-version: 0.1.0
+version: 0.1.2
 icon: ./icon.png
 scripts:
   bootstrap: |
-    sudo apt-get update
-    sudo apt-get install -y python3-opencv
     pip install --upgrade pip
     pip install -r requirements.txt
+    pip uninstall opencv-python opencv-python-headless -y
+    pip install opencv-python-headless==4.10.0.84
 dependencies:
   oomol-preview: 0.0.3
 name: pdf-craft-cloud
 repository: https://github.com/oomol-flows/pdf-craft
-releaseNotes: support LaTeX & table recognization.
+releaseNotes: |-
+  support LaTeX & table recognization.
+
+  add cloud converter
 displayName: PDF Craft Cloud
 description: |
   PDF craft is a project that converts scanned PDF books into Markdown or EPUB formats using local AI
