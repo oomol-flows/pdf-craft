@@ -1,28 +1,25 @@
-import torch
 
 from typing import TypedDict, Literal
 from tempfile import mkdtemp
 from pdf_craft import OCRLevel, PDFPageExtractor, ExtractedTableFormat
-
+from .cloud_extractor import CloudExtractor
 
 class BuildParams(TypedDict):
-  device: Literal["cpu", "cuda"]
   model_dir: str | None
   ocr_level: Literal["once", "once_per_layout"]
   extract_formula: bool
 
+
 def build_extractor(
     params: BuildParams,
+    api_base_url: str,
+    api_key: str,
     extract_table_format: ExtractedTableFormat | None = None,
   ) -> PDFPageExtractor:
 
-  device = params["device"]
   model_dir: str | None = params["model_dir"]
   ocr_level_value = params["ocr_level"]
   extract_formula = params["extract_formula"]
-
-  if model_dir is None:
-    model_dir = mkdtemp()
 
   ocr_level: OCRLevel
   if ocr_level_value == "once":
@@ -32,14 +29,15 @@ def build_extractor(
   else:
     raise ValueError(f"ocr_level: {ocr_level_value} is not supported")
 
-  if device == "cuda" and not torch.cuda.is_available():
-    device = "cpu"
-    print("Warn: cuda is not available, use cpu instead")
+  cloud_doc_extractor = CloudExtractor(
+    base_url=api_base_url,
+    api_key=api_key,
+  )
 
   return PDFPageExtractor(
-    device=device,
+    device="cuda",
     ocr_level=ocr_level,
-    model_dir_path=model_dir,
     extract_formula=extract_formula,
     extract_table_format=extract_table_format,
+    doc_extractor=cloud_doc_extractor
   )

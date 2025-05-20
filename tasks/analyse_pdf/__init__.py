@@ -7,7 +7,6 @@ class LLMModelOptions(typing.TypedDict):
     max_tokens: int
 class Inputs(typing.TypedDict):
     pdf: str
-    device: typing.Literal["cpu", "cuda"]
     model_dir: str | None
     ocr_level: typing.Literal["once", "once_per_layout"]
     extract_formula: bool
@@ -67,7 +66,10 @@ def main(params: Inputs, context: Context) -> Outputs:
   extractor: PDFPageExtractor = build_extractor(
     params=params,
     extract_table_format=extract_table_format,
+    api_base_url=context.oomol_llm_env.get("base_url"),
+    api_key=context.oomol_llm_env.get("api_key")
   )
+
   analyse(
     llm=llm,
     pdf_path=pdf_path,

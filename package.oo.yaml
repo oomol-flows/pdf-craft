@@ -6,18 +6,12 @@ scripts:
     sudo apt-get install -y python3-opencv
     pip install --upgrade pip
     pip install -r requirements.txt
-    if command -v nvidia-smi &> /dev/null; then
-      pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
-      pip install onnxruntime-gpu==1.21.0 # 临时方案，等待修复 https://github.com/oomol-lab/pdf-craft/issues/85
-    else
-      pip install onnxruntime==1.21.0
-    fi
 dependencies:
   oomol-preview: 0.0.3
-name: pdf-craft
+name: pdf-craft-cloud
 repository: https://github.com/oomol-flows/pdf-craft
 releaseNotes: support LaTeX & table recognization.
-displayName: PDF craft
-description: PDF craft is a project that converts scanned PDF books into
-  Markdown or EPUB formats using local AI.
+displayName: PDF Craft Cloud
+description: |
+  PDF craft is a project that converts scanned PDF books into Markdown or EPUB formats using local AI
 releaseType: package

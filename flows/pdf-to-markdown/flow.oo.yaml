@@ -4,8 +4,6 @@ nodes:
     node_id: pdf-to-markdown#2
     inputs_from:
       - handle: pdf
-      - handle: device
-        value: cuda
       - handle: model_dir
         value:
       - handle: output_file

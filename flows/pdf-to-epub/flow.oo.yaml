@@ -8,8 +8,6 @@ nodes:
         value:
       - handle: output_dir
         value:
-      - handle: device
-        value: cuda
       - handle: pdf
       - handle: retry_times
         value: 5

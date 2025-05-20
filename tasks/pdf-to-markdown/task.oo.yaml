@@ -4,16 +4,7 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: file
-  - handle: device
-    json_schema:
-      enum:
-        - cpu
-        - cuda
-      ui:options:
-        labels:
-          - CPU
-          - CUDA
-    value: cuda
+    value: /oomol-driver/oomol-storage/pdf/citation.pdf
   - handle: model_dir
     json_schema:
       type: string
