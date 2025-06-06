@@ -20,7 +20,7 @@ class Outputs(typing.TypedDict):
 from math import ceil
 from pathlib import Path
 from oocana import Context
-from pdf_craft import analyse, LLM, AnalysingStep, PDFPageExtractor, ExtractedTableFormat
+from pdf_craft import analyse, LLM, PDFPageExtractor, ExtractedTableFormat, AnalysingStep
 from shared import build_extractor
 from .cache import get_analysing_dir
 
@@ -72,72 +72,34 @@ def main(params: Inputs, context: Context) -> Outputs:
     report_step=reporter.report_step,
     report_progress=reporter.report_progress,
   )
-  return { "output_dir": output_dir_path }
+  return { "output_dir": str(output_dir_path) }
 
 class _Reporter:
   def __init__(self, context: Context) -> None:
     self._context: Context = context
-    self._total: int = 0
-    self._offset: float = 0.0
-    self._delta: float = 0.0
-    self._steps = (
-      AnalysingStep.OCR,
-      AnalysingStep.ANALYSE_PAGE,
-      AnalysingStep.EXTRACT_INDEX,
-      AnalysingStep.EXTRACT_CITATION,
-      AnalysingStep.EXTRACT_MAIN_TEXT,
-      AnalysingStep.MARK_POSITION,
-      AnalysingStep.ANALYSE_META,
-      AnalysingStep.GENERATE_CHAPTERS,
-    )
-    self._offset_progresses: list[float] = []
-    self._delta_progresses: list[float] = []
-    sum_weight: float = 0.0
+    self._step: int = 0
+    self._progress: int = 0
+    self._max_progress: int | None = None
 
-    for step in self._steps:
-      weight = self._weight(step)
-      self._offset_progresses.append(sum_weight)
-      self._delta_progresses.append(weight)
-      sum_weight += weight
-
-    for i in range(len(self._steps)):
-      self._offset_progresses[i] /= sum_weight
-      self._delta_progresses[i] /= sum_weight
-
-  def _weight(self, step: AnalysingStep) -> float:
-    if step == AnalysingStep.OCR:
-      return 5
-    elif step == AnalysingStep.ANALYSE_PAGE:
-      return 5
-    elif step == AnalysingStep.EXTRACT_INDEX:
-      return 1
-    elif step == AnalysingStep.EXTRACT_CITATION:
-      return 2
-    elif step == AnalysingStep.EXTRACT_MAIN_TEXT:
-      return 3
-    elif step == AnalysingStep.MARK_POSITION:
-      return 2
-    elif step == AnalysingStep.ANALYSE_META:
-      return 1
-    elif step == AnalysingStep.GENERATE_CHAPTERS:
-      return 1
-
-  def report_step(self, reported_step: AnalysingStep, count: int):
-    index: int = -1
-    for i, step in enumerate(self._steps):
-      if step == reported_step:
-        index = i
+  def report_step(self, step: AnalysingStep) -> None:
+    for i, iter_step in enumerate(AnalysingStep):
+      if iter_step == step:
+        self._step = i
         break
+    self._progress = 0
+    self._max_progress = None
+    self._sync_progress()
 
-    assert index >= 0
-    self._total = count
-    self._delta = self._delta_progresses[index]
-    self._offset = self._offset_progresses[index]
-    self.report_progress(0)
+  def report_progress(self, progress: int, max_progress: int | None) -> None:
+    self._progress = progress
+    self._max_progress = max_progress
+    self._sync_progress()
 
-  def report_progress(self, completed_count: int):
-    if self._total == 0:
-      return
-    rate = completed_count / self._total
-    progress = rate * self._delta + self._offset
+  def _sync_progress(self):
+    step_progress: float = 0.0
+    if self._max_progress is not None:
+      step_progress = float(self._progress) / float(self._max_progress)
+      step_progress = min(1.0, max(0.0, step_progress))
+    progress = float(self._step) / float(len(AnalysingStep))
+    progress += step_progress / float(len(AnalysingStep))
     self._context.report_progress(100.0 * progress)
