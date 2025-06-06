@@ -1,10 +1,6 @@
 #region generated meta
 import typing
-class LLMModelOptions(typing.TypedDict):
-    model: str
-    temperature: float
-    top_p: float
-    max_tokens: int
+from oocana import Context, LLMModelOptions
 class Inputs(typing.TypedDict):
     pdf: str
     device: typing.Literal["cpu", "cuda"]
