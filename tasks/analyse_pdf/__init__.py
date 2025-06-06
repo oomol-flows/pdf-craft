@@ -9,6 +9,7 @@ class Inputs(typing.TypedDict):
     extract_formula: bool
     extract_table: bool
     window_tokens: int | None
+    threads_count: int
     retry_times: int
     retry_interval_seconds: float
     output_dir: str | None
@@ -41,6 +42,10 @@ def main(params: Inputs, context: Context) -> Outputs:
   if window_tokens is not None:
     window_tokens = ceil(window_tokens)
 
+  threads_count: int = params["threads_count"]
+  if threads_count is not None:
+    threads_count = ceil(threads_count)
+
   if output_dir_path is None:
     output_dir_path = Path(context.session_dir) / context.job_id
     output_dir_path.mkdir(parents=True, exist_ok=True)
@@ -69,6 +74,7 @@ def main(params: Inputs, context: Context) -> Outputs:
     analysing_dir_path=get_analysing_dir(context, pdf_path),
     output_dir_path=output_dir_path,
     window_tokens=window_tokens,
+    threads_count=threads_count,
     report_step=reporter.report_step,
     report_progress=reporter.report_progress,
   )

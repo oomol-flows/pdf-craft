@@ -46,6 +46,11 @@ inputs_def:
       type: integer
     value:
     nullable: true
+  - handle: threads_count
+    json_schema:
+      type: integer
+      minimum: 1
+    value: 1
   - handle: retry_times
     json_schema:
       type: integer
