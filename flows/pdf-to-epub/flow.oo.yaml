@@ -29,6 +29,8 @@ nodes:
         value: false
       - handle: extract_table
         value: false
+      - handle: threads_count
+        value: 1
   - task: self::generate_epub
     title: Generate EPUB
     node_id: generate_epub#1
