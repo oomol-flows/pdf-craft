@@ -1,6 +1,7 @@
 import torch
 
 from typing import TypedDict, Literal
+from pathlib import Path
 from tempfile import mkdtemp
 from pdf_craft import OCRLevel, PDFPageExtractor, ExtractedTableFormat
 
@@ -39,7 +40,7 @@ def build_extractor(
   return PDFPageExtractor(
     device=device,
     ocr_level=ocr_level,
-    model_dir_path=model_dir,
+    model_dir_path=Path(model_dir),
     extract_formula=extract_formula,
     extract_table_format=extract_table_format,
   )

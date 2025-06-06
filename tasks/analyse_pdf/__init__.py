@@ -17,9 +17,8 @@ class Outputs(typing.TypedDict):
     output_dir: str
 #endregion
 
-import os
-
 from math import ceil
+from pathlib import Path
 from oocana import Context
 from pdf_craft import analyse, LLM, AnalysingStep, PDFPageExtractor, ExtractedTableFormat
 from shared import build_extractor
@@ -28,8 +27,8 @@ from .cache import get_analysing_dir
 
 def main(params: Inputs, context: Context) -> Outputs:
   env = context.oomol_llm_env
-  pdf_path = params["pdf"]
-  output_dir = params["output_dir"]
+  pdf_path = Path(params["pdf"])
+  output_dir_path = params["output_dir"]
   llm_model = params["llm"]
 
   extract_table_format: ExtractedTableFormat
@@ -42,12 +41,11 @@ def main(params: Inputs, context: Context) -> Outputs:
   if window_tokens is not None:
     window_tokens = ceil(window_tokens)
 
-  if output_dir is None:
-    output_dir = os.path.join(
-      context.session_dir,
-      context.job_id,
-    )
-    os.makedirs(output_dir, exist_ok=True)
+  if output_dir_path is None:
+    output_dir_path = Path(context.session_dir) / context.job_id
+    output_dir_path.mkdir(parents=True, exist_ok=True)
+  else:
+    output_dir_path = Path(output_dir_path)
 
   reporter = _Reporter(context)
   llm = LLM(
@@ -69,12 +67,12 @@ def main(params: Inputs, context: Context) -> Outputs:
     pdf_path=pdf_path,
     pdf_page_extractor=extractor,
     analysing_dir_path=get_analysing_dir(context, pdf_path),
-    output_dir_path=output_dir,
+    output_dir_path=output_dir_path,
     window_tokens=window_tokens,
     report_step=reporter.report_step,
     report_progress=reporter.report_progress,
   )
-  return { "output_dir": output_dir }
+  return { "output_dir": output_dir_path }
 
 class _Reporter:
   def __init__(self, context: Context) -> None:

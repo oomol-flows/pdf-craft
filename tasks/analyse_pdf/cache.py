@@ -1,13 +1,14 @@
 import os
 import hashlib
 
+from pathlib import Path
 from oocana import Context
 
 
-def get_analysing_dir(context: Context, pdf_path: str):
-  cache_path = os.path.join(context.tmp_pkg_dir, context.node_id)
+def get_analysing_dir(context: Context, pdf_path: Path) -> Path:
+  cache_path = Path(context.tmp_pkg_dir) / context.node_id
   pdf_hash = _calculate_sha512(pdf_path)
-  return os.path.join(cache_path, pdf_hash)
+  return cache_path / pdf_hash
 
 def _calculate_sha512(file_path):
   sha512_hash = hashlib.sha512()
