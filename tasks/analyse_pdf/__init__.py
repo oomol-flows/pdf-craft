@@ -49,9 +49,9 @@ def main(params: Inputs, context: Context) -> Outputs:
   correction_mode: CorrectionMode
   correction = params["correction"]
   if correction == "once":
-    correction_mode = CorrectionMode.NO
-  elif correction == "detailed":
     correction_mode = CorrectionMode.ONCE
+  elif correction == "detailed":
+    correction_mode = CorrectionMode.DETAILED
   else:
     correction_mode = CorrectionMode.NO
 
