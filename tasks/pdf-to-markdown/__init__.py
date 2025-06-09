@@ -1,6 +1,5 @@
 #region generated meta
 import typing
-from oocana import Context
 class Inputs(typing.TypedDict):
     pdf: str
     device: typing.Literal["cpu", "cuda"]

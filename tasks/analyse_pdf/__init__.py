@@ -1,11 +1,12 @@
 #region generated meta
 import typing
-from oocana import Context, LLMModelOptions
+from oocana import LLMModelOptions
 class Inputs(typing.TypedDict):
     pdf: str
     device: typing.Literal["cpu", "cuda"]
     model_dir: str | None
     ocr_level: typing.Literal["once", "once_per_layout"]
+    correction: typing.Literal["off", "once", "detailed"]
     extract_formula: bool
     extract_table: bool
     window_tokens: int | None
@@ -21,7 +22,14 @@ class Outputs(typing.TypedDict):
 from math import ceil
 from pathlib import Path
 from oocana import Context
-from pdf_craft import analyse, LLM, PDFPageExtractor, ExtractedTableFormat, AnalysingStep
+from pdf_craft import (
+  analyse,
+  LLM,
+  PDFPageExtractor,
+  ExtractedTableFormat,
+  AnalysingStep,
+  CorrectionMode,
+)
 from shared import build_extractor
 from .cache import get_analysing_dir
 
@@ -37,6 +45,15 @@ def main(params: Inputs, context: Context) -> Outputs:
     extract_table_format = ExtractedTableFormat.HTML
   else:
     extract_table_format = ExtractedTableFormat.DISABLE
+
+  correction_mode: CorrectionMode
+  correction = params["correction"]
+  if correction == "once":
+    correction_mode = CorrectionMode.NO
+  elif correction == "detailed":
+    correction_mode = CorrectionMode.ONCE
+  else:
+    correction_mode = CorrectionMode.NO
 
   window_tokens = params["window_tokens"]
   if window_tokens is not None:
@@ -73,6 +90,7 @@ def main(params: Inputs, context: Context) -> Outputs:
     pdf_page_extractor=extractor,
     analysing_dir_path=get_analysing_dir(context, pdf_path),
     output_dir_path=output_dir_path,
+    correction_mode=correction_mode,
     window_tokens=window_tokens,
     threads_count=threads_count,
     report_step=reporter.report_step,
