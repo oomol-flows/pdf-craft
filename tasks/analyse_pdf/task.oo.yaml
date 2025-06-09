@@ -33,6 +33,18 @@ inputs_def:
           - Once per Layout
     value: once
     nullable: false
+  - handle: correction
+    json_schema:
+      enum:
+        - off
+        - once
+        - detailed
+      ui:options:
+        labels:
+          - Off
+          - Once
+          - Detailed
+    value: once
   - handle: extract_formula
     json_schema:
       type: boolean
