@@ -1,6 +1,6 @@
 #region generated meta
 import typing
-from oocana import Context, LLMModelOptions
+from oocana import LLMModelOptions
 class Inputs(typing.TypedDict):
     pdf: str
     device: typing.Literal["cpu", "cuda"]

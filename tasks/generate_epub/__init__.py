@@ -1,6 +1,5 @@
 #region generated meta
 import typing
-from oocana import Context
 class Inputs(typing.TypedDict):
     analysed_dir: str
     render_latex: bool
