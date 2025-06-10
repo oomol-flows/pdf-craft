@@ -13,7 +13,7 @@ scripts:
       pip install onnxruntime==1.21.0
     fi
 dependencies:
-  oomol-preview: 0.0.3
+  oomol-preview: 0.0.4
 name: pdf-craft
 repository: https://github.com/oomol-flows/pdf-craft
 releaseNotes: |-
