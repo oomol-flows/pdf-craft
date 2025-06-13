@@ -9,7 +9,7 @@ nodes:
       - handle: output_dir
         value:
       - handle: device
-        value: cuda
+        value: cloud
       - handle: pdf
       - handle: retry_times
         value: 5

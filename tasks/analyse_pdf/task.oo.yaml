@@ -16,7 +16,7 @@ inputs_def:
           - CPU
           - CUDA
           - Cloud
-    value: cuda
+    value: cloud
     nullable: false
   - handle: model_dir
     json_schema:
