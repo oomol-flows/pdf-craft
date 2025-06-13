@@ -33,6 +33,9 @@ def build_extractor(
   else:
     raise ValueError(f"ocr_level: {ocr_level_value} is not supported")
 
+  if device == "cloud":
+    pass
+
   if device == "cuda" and not torch.cuda.is_available():
     device = "cpu"
     print("Warn: cuda is not available, use cpu instead")
