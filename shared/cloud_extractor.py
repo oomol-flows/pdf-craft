@@ -1,10 +1,8 @@
 import httpx
 import time
-import json
-import logging
 import io
-from typing import Optional, Any
 
+from typing import Optional, Any
 from enum import Enum
 from PIL import Image
 from doc_page_extractor import ExtractedResult, TableLayoutParsedFormat
@@ -53,14 +51,18 @@ class CloudExtractor(DocExtractorProtocol):
       "Authorization": self.api_key,
     }
 
+  def prepare_models(self) -> None:
+    pass
+
   def extract(
-    self,
-    image: Image.Image,
-    extract_formula: bool,
-    extract_table_format: TableLayoutParsedFormat | None,
-    ocr_for_each_layouts: bool,
-    adjust_points: bool,
-  ) -> ExtractedResult:
+      self,
+      image: Image.Image,
+      extract_formula: bool,
+      extract_table_format: TableLayoutParsedFormat | None = None,
+      ocr_for_each_layouts: bool = False,
+      adjust_points: bool = False,
+    ) -> ExtractedResult:
+
     params = TaskParams(
       image=image,
       extract_formula=extract_formula,
@@ -77,7 +79,11 @@ class CloudExtractor(DocExtractorProtocol):
     time.sleep(3)
     task_data = self.get_result_until_success(task_id=task_id)
     assert task_data is not None, "Task data is None"
-    return convert_data(task_data)
+    result = convert_data(task_data)
+    if result.extracted_image is None:
+      # remote extract no extracted_image
+      result.extracted_image = image.copy()
+    return result
 
   def create_task(self, params: TaskParams):
     retrier = Retrying(
@@ -100,7 +106,7 @@ class CloudExtractor(DocExtractorProtocol):
     files = {
       "image": buffer
     }
-    data = {
+    data: dict[str, Any] = {
       "extract_formula": params.extract_formula,
       "ocr_for_each_layouts": params.ocr_for_each_layouts,
       "adjust_points": params.adjust_points,

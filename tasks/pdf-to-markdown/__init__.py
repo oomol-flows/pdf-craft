@@ -39,6 +39,7 @@ def main(params: Inputs, context: Context) -> Outputs:
 
   extractor: PDFPageExtractor = build_extractor(
     params=params,
+    context=context,
     extract_table_format=extract_table_format,
   )
 
