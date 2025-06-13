@@ -10,11 +10,13 @@ inputs_def:
       enum:
         - cpu
         - cuda
+        - cloud
       ui:options:
         labels:
           - CPU
           - CUDA
-    value: cuda
+          - Cloud
+    value: cloud
     nullable: false
   - handle: model_dir
     json_schema:

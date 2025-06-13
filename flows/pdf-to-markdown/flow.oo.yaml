@@ -5,7 +5,7 @@ nodes:
     inputs_from:
       - handle: pdf
       - handle: device
-        value: cuda
+        value: cloud
       - handle: model_dir
         value:
       - handle: output_file

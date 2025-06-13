@@ -3,7 +3,7 @@ import typing
 from oocana import LLMModelOptions
 class Inputs(typing.TypedDict):
     pdf: str
-    device: typing.Literal["cpu", "cuda"]
+    device: typing.Literal["cpu", "cuda", "cloud"]
     model_dir: str | None
     ocr_level: typing.Literal["once", "once_per_layout"]
     correction: typing.Literal["off", "once", "detailed"]
@@ -82,6 +82,7 @@ def main(params: Inputs, context: Context) -> Outputs:
   )
   extractor: PDFPageExtractor = build_extractor(
     params=params,
+    context=context,
     extract_table_format=extract_table_format,
   )
   analyse(
