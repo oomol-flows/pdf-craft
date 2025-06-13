@@ -683,7 +683,7 @@ description = "Lightweight in-process concurrent programming"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "(platform_machine == \"aarch64\" or platform_machine == \"ppc64le\" or platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"win32\" or platform_machine == \"WIN32\") and python_version < \"3.14\""
+markers = "platform_machine == \"aarch64\" or platform_machine == \"ppc64le\" or platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"win32\" or platform_machine == \"WIN32\""
 files = [
     {file = "greenlet-3.2.3-cp310-cp310-macosx_11_0_universal2.whl", hash = "sha256:1afd685acd5597349ee6d7a88a8bec83ce13c106ac78c196ee9dde7c04fe87be"},
     {file = "greenlet-3.2.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:761917cac215c61e9dc7324b2606107b3b292a8349bdebb31503ab4de3f559ac"},
@@ -1974,14 +1974,14 @@ xml = ["lxml (>=4.9.2)"]
 
 [[package]]
 name = "pdf-craft"
-version = "0.2.1"
-description = "PDF craft can convert PDF files into various other formats. This project will focus on processing PDF files of scanned books. The project has just started."
+version = "0.2.2"
+description = "PDF craft can convert PDF files into various other formats. This project will focus on processing PDF files of scanned books."
 optional = false
-python-versions = "*"
+python-versions = "<3.13,>=3.10"
 groups = ["main"]
 files = [
-    {file = "pdf_craft-0.2.1-py3-none-any.whl", hash = "sha256:9dbdf56c52c20a9aa871f69700bcea8962dea1dcd18bb887bd5b0f4778b9f8bd"},
-    {file = "pdf_craft-0.2.1.tar.gz", hash = "sha256:33b692658a2de097d72611360bec168f98d3b5869abf866501d930a7d9fe8694"},
+    {file = "pdf_craft-0.2.2-py3-none-any.whl", hash = "sha256:af4f1c60ec7784aee78c1bef1c8704bb7d9e46fb3da2f9cf2623d642a5ce005d"},
+    {file = "pdf_craft-0.2.2.tar.gz", hash = "sha256:b285cb9011c9400d73227673411a9e9d24c8e469255f00d8a18721776edd1f4f"},
 ]
 
 [package.dependencies]
@@ -1991,7 +1991,7 @@ jinja2 = ">=3.1.5,<4.0.0"
 langchain = {version = ">=0.3.21,<0.4.0", extras = ["openai"]}
 latex2mathml = ">=3.77.0,<4.0.0"
 matplotlib = ">=3.10.1,<3.11.0"
-pyMuPDF = ">=1.25.3,<2.0.0"
+pymupdf = ">=1.25.3,<2.0.0"
 pyyaml = ">=6.0,<7.0"
 resource-segmentation = "0.0.1"
 shapely = ">=2.0.6,<3.0.0"
@@ -2798,7 +2798,7 @@ description = "Easily download, build, install, upgrade, and uninstall Python pa
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\""
+markers = "platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version == \"3.12\""
 files = [
     {file = "setuptools-80.9.0-py3-none-any.whl", hash = "sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922"},
     {file = "setuptools-80.9.0.tar.gz", hash = "sha256:f36b47402ecde768dbfafc46e8e4207b4360c654f1f3bb84475f0a28628fb19c"},
@@ -3810,5 +3810,5 @@ cffi = ["cffi (>=1.11)"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.10,<4.0"
-content-hash = "e02b5e644e04540db1fb5a072bb374c34f06df9242052de05d9e4aee74ac7efb"
+python-versions = ">=3.10,<3.13"
+content-hash = "2af0dc352212444f46d710a7b397d87c1bff6e25bca90ad0d024e4f13f6a7edb"
