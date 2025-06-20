@@ -13,6 +13,9 @@ scripts:
     pip install opencv-python-headless==4.10.0.84
 dependencies:
   oomol-preview: 0.0.4
+exclude_flow_dependencies:
+  - pdf-craft
+  - dataclasses-json
 name: pdf-craft
 repository: https://github.com/oomol-flows/pdf-craft
 releaseNotes: support cloud mode.
