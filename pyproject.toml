@@ -8,7 +8,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 dependencies = [
-    "pdf-craft (==0.2.2)",
+    "pdf-craft (==0.2.4)",
     "dataclasses-json (==0.6.7)"
 ]
 
