@@ -81,6 +81,7 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: dir
+    value:
     nullable: true
   - handle: llm
     json_schema:

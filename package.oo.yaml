@@ -1,4 +1,4 @@
-version: 0.2.5
+version: 0.2.6
 icon: ./icon.png
 scripts:
   bootstrap: |
@@ -18,7 +18,7 @@ exclude_flow_dependencies:
   - dataclasses-json
 name: pdf-craft
 repository: https://github.com/oomol-flows/pdf-craft
-releaseNotes: update icon
+releaseNotes: fix wrong progress bar & fix losing some of contents.
 displayName: PDF craft
 description: PDF craft is a project that converts scanned PDF books into
   Markdown or EPUB formats using local AI.
