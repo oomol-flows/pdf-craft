@@ -16,6 +16,11 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: save
+      ui:options:
+        filters:
+          - name: EPUB
+            extensions:
+              - epub
     value:
     nullable: true
 outputs_def:
@@ -24,6 +29,11 @@ outputs_def:
     json_schema:
       type: string
       ui:widget: save
+      ui:options:
+        filters:
+          - name: EPUB
+            extensions:
+              - epub
 ui:
   default_width: 450
 executor:

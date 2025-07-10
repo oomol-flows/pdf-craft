@@ -4,6 +4,11 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: file
+      ui:options:
+        filters:
+          - name: PDF
+            extensions:
+              - pdf
   - handle: device
     json_schema:
       enum:
@@ -56,6 +61,13 @@ outputs_def:
     json_schema:
       type: string
       ui:widget: save
+      ui:options:
+        filters:
+          - name: Markdown
+            extensions:
+              - md
+              - markdown
+              - mdown
 ui:
   default_width: 456.2563288935522
 executor:
