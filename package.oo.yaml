@@ -12,7 +12,7 @@ scripts:
     pip uninstall opencv-python opencv-python-headless -y
     pip install opencv-python-headless==4.10.0.84
 dependencies:
-  oomol-preview: 0.0.4
+  oomol-preview: 0.1.0
 exclude_flow_dependencies:
   - pdf-craft
   - dataclasses-json
