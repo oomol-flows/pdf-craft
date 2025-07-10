@@ -4,6 +4,11 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: file
+      ui:options:
+        filters:
+          - name: PDF
+            extensions:
+              - pdf
     nullable: false
   - handle: device
     json_schema:
