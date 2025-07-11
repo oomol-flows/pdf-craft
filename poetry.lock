@@ -861,14 +861,14 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "huggingface-hub"
-version = "0.33.2"
+version = "0.33.3"
 description = "Client library to download and publish models, datasets and other repos on the huggingface.co hub"
 optional = false
 python-versions = ">=3.8.0"
 groups = ["main"]
 files = [
-    {file = "huggingface_hub-0.33.2-py3-none-any.whl", hash = "sha256:3749498bfa91e8cde2ddc2c1db92c79981f40e66434c20133b39e5928ac9bcc5"},
-    {file = "huggingface_hub-0.33.2.tar.gz", hash = "sha256:84221defaec8fa09c090390cd68c78b88e3c4c2b7befba68d3dc5aacbc3c2c5f"},
+    {file = "huggingface_hub-0.33.3-py3-none-any.whl", hash = "sha256:d72241a6f78b7f5978e3c757275d5c10dcbdf94d7c766c73d8ecb7bf1a108d46"},
+    {file = "huggingface_hub-0.33.3.tar.gz", hash = "sha256:d3c8be3b0abf5e1fae313efe9c4cdd78928cc3279cf517903b05b688a7abf13e"},
 ]
 
 [package.dependencies]
@@ -1232,14 +1232,14 @@ langchain-core = ">=0.3.51,<1.0.0"
 
 [[package]]
 name = "langsmith"
-version = "0.4.4"
+version = "0.4.5"
 description = "Client library to connect to the LangSmith LLM Tracing and Evaluation Platform."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "langsmith-0.4.4-py3-none-any.whl", hash = "sha256:014c68329bd085bd6c770a6405c61bb6881f82eb554ce8c4d1984b0035fd1716"},
-    {file = "langsmith-0.4.4.tar.gz", hash = "sha256:70c53bbff24a7872e88e6fa0af98270f4986a6e364f9e85db1cc5636defa4d66"},
+    {file = "langsmith-0.4.5-py3-none-any.whl", hash = "sha256:4167717a2cccc4dff5809dbddc439628e836f6fd13d4fdb31ea013bc8d5cfaf5"},
+    {file = "langsmith-0.4.5.tar.gz", hash = "sha256:49444bd8ccd4e46402f1b9ff1d686fa8e3a31b175e7085e72175ab8ec6164a34"},
 ]
 
 [package.dependencies]
@@ -1777,14 +1777,14 @@ files = [
 
 [[package]]
 name = "openai"
-version = "1.93.2"
+version = "1.95.0"
 description = "The official Python library for the openai API"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "openai-1.93.2-py3-none-any.whl", hash = "sha256:5adbbebd48eae160e6d68efc4c0a4f7cb1318a44c62d9fc626cec229f418eab4"},
-    {file = "openai-1.93.2.tar.gz", hash = "sha256:4a7312b426b5e4c98b78dfa1148b5683371882de3ad3d5f7c8e0c74f3cc90778"},
+    {file = "openai-1.95.0-py3-none-any.whl", hash = "sha256:a7afc9dca7e7d616371842af8ea6dbfbcb739a85d183f5f664ab1cc311b9ef18"},
+    {file = "openai-1.95.0.tar.gz", hash = "sha256:54bc42df9f7142312647dd485d34cca5df20af825fa64a30ca55164be2cf4cc9"},
 ]
 
 [package.dependencies]
@@ -2037,14 +2037,14 @@ xml = ["lxml (>=4.9.2)"]
 
 [[package]]
 name = "pdf-craft"
-version = "0.2.4"
+version = "0.2.5"
 description = "PDF craft can convert PDF files into various other formats. This project will focus on processing PDF files of scanned books."
 optional = false
 python-versions = "<3.13,>=3.10"
 groups = ["main"]
 files = [
-    {file = "pdf_craft-0.2.4-py3-none-any.whl", hash = "sha256:a1294d9eb7fe37a924e6dcb413fe3c92b5119331ff4828b4662887ade2b20e99"},
-    {file = "pdf_craft-0.2.4.tar.gz", hash = "sha256:556cef1ac2ff4ccabed6371d4fe389b4795ebbd2ee5fff90c8bec60058e86e40"},
+    {file = "pdf_craft-0.2.5-py3-none-any.whl", hash = "sha256:e1af7b28e176a9326f196c134ee2d368066ae3174f62ff06878cf598afc0cfeb"},
+    {file = "pdf_craft-0.2.5.tar.gz", hash = "sha256:58452b6b95badca6d0548caff4df386698be54f8ec1c335cd3f3c0c377d5c333"},
 ]
 
 [package.dependencies]
@@ -2057,7 +2057,7 @@ latex2mathml = ">=3.77.0,<4.0.0"
 matplotlib = ">=3.10.1,<3.11.0"
 pymupdf = ">=1.25.3,<2.0.0"
 pyyaml = ">=6.0,<7.0"
-resource-segmentation = "0.0.1"
+resource-segmentation = "0.0.3"
 shapely = ">=2.0.6,<3.0.0"
 strenum = ">=0.4.15,<0.5.0"
 tiktoken = ">=0.9.0,<1.0.0"
@@ -2721,14 +2721,14 @@ requests = ">=2.0.1,<3.0.0"
 
 [[package]]
 name = "resource-segmentation"
-version = "0.0.1"
+version = "0.0.3"
 description = ""
 optional = false
-python-versions = "*"
+python-versions = "<3.13,>=3.10"
 groups = ["main"]
 files = [
-    {file = "resource_segmentation-0.0.1-py3-none-any.whl", hash = "sha256:a8ed831ee84caeff0b854cb729dd0c116caed902a69c52194f8d6a79523d7f21"},
-    {file = "resource_segmentation-0.0.1.tar.gz", hash = "sha256:d363f1e8c65b04f73bdc987cd0159aca865a6b2d92976229033404c90da051ee"},
+    {file = "resource_segmentation-0.0.3-py3-none-any.whl", hash = "sha256:91643913c40e5fb0ac651da5583935022971ebbfcc1b5249b6431a8ebc84cec5"},
+    {file = "resource_segmentation-0.0.3.tar.gz", hash = "sha256:5084991214243cd727174b36feaaacae65e13d3c701b399520a7b325f13cbfc2"},
 ]
 
 [[package]]
@@ -3950,4 +3950,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.13"
-content-hash = "e70b17c350abcf37154b204174d0cad8f2465d902fcdde27b8cdd9e1dffe5a6c"
+content-hash = "a41445972534d7c07a50d814d9013a5ab946ba0e0db6ec5aa2f437cb06666475"
