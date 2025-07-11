@@ -27,4 +27,4 @@ nodes:
           - node_id: pdf-to-markdown#2
             output_handle: output_file
 icon: ":twemoji:bookmark-tabs:"
-title: ""
+title: "PDF to Markdown"
