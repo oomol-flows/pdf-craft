@@ -30,7 +30,7 @@ from pdf_craft import (
   CorrectionMode,
 )
 from shared import build_extractor
-from .cache import get_analysing_dir
+from .cache import get_or_prepare_cache_dir
 from .reporter import Reporter
 
 
@@ -69,6 +69,7 @@ def main(params: Inputs, context: Context) -> Outputs:
   else:
     output_dir_path = Path(output_dir_path)
 
+  cache_dir_path = get_or_prepare_cache_dir(context, pdf_path)
   reporter = Reporter(context)
   llm = LLM(
     key=env["api_key"],
@@ -89,7 +90,7 @@ def main(params: Inputs, context: Context) -> Outputs:
     llm=llm,
     pdf_path=pdf_path,
     pdf_page_extractor=extractor,
-    analysing_dir_path=get_analysing_dir(context, pdf_path),
+    analysing_dir_path=cache_dir_path / "analysing",
     output_dir_path=output_dir_path,
     correction_mode=correction_mode,
     window_tokens=window_tokens,
