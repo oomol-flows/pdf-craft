@@ -42,10 +42,12 @@ class Reporter:
     self._max_progress: int | None = None
 
     if self._state_file.exists():
+      percent: int
       with open(self._state_file, "r", encoding="utf-8") as file:
         value = json.loads(file.read())
         if isinstance(value, int) or isinstance(value, float):
-          self._percent = round(value)
+          percent = round(value)
+      self._report_percent(percent)
 
   def report_step(self, step: AnalysingStep) -> None:
     self._scale_and_offset = _STEP2RATE_AND_OFFSET[step]
