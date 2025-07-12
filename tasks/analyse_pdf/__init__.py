@@ -40,6 +40,9 @@ def main(params: Inputs, context: Context) -> Outputs:
   output_dir_path = params["output_dir"]
   llm_model = params["llm"]
 
+  cache_dir_path = get_or_prepare_cache_dir(context, pdf_path)
+  reporter = Reporter(context, cache_dir_path)
+
   extract_table_format: ExtractedTableFormat
   if params["extract_table"]:
     extract_table_format = ExtractedTableFormat.HTML
@@ -69,8 +72,6 @@ def main(params: Inputs, context: Context) -> Outputs:
   else:
     output_dir_path = Path(output_dir_path)
 
-  cache_dir_path = get_or_prepare_cache_dir(context, pdf_path)
-  reporter = Reporter(context, cache_dir_path)
   llm = LLM(
     key=env["api_key"],
     url=env["base_url_v1"],
