@@ -1,3 +1,6 @@
+import json
+
+from pathlib import Path
 from oocana import Context
 from pdf_craft import AnalysingStep
 
@@ -30,11 +33,19 @@ _STEP2RATE_AND_OFFSET: dict[AnalysingStep, tuple[float, float]] = _calculate_ste
 ))
 
 class Reporter:
-  def __init__(self, context: Context) -> None:
+  def __init__(self, context: Context, cache_dir_path: Path) -> None:
     self._context: Context = context
+    self._state_file: Path = cache_dir_path / "progress.json"
     self._scale_and_offset: tuple[float, float] = (0.0, 0.0)
     self._progress: int = 0
+    self._percent: int = 0
     self._max_progress: int | None = None
+
+    if self._state_file.exists():
+      with open(self._state_file, "r", encoding="utf-8") as file:
+        value = json.loads(file.read())
+        if isinstance(value, int) or isinstance(value, float):
+          self._percent = round(value)
 
   def report_step(self, step: AnalysingStep) -> None:
     self._scale_and_offset = _STEP2RATE_AND_OFFSET[step]
@@ -55,4 +66,12 @@ class Reporter:
 
     scale, offset = self._scale_and_offset
     progress = step_progress * scale + offset
-    self._context.report_progress(100.0 * progress)
+    self._report_percent(round(100.0 * progress))
+
+  def _report_percent(self, percent: int):
+    if self._percent == percent:
+      return
+    self._percent = percent
+    self._context.report_progress(percent)
+    with open(self._state_file, "w", encoding="utf-8") as file:
+      file.write(json.dumps(percent))

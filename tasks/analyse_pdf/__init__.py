@@ -70,7 +70,7 @@ def main(params: Inputs, context: Context) -> Outputs:
     output_dir_path = Path(output_dir_path)
 
   cache_dir_path = get_or_prepare_cache_dir(context, pdf_path)
-  reporter = Reporter(context)
+  reporter = Reporter(context, cache_dir_path)
   llm = LLM(
     key=env["api_key"],
     url=env["base_url_v1"],
