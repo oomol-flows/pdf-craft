@@ -112,17 +112,18 @@ def _calculate_steps(items: tuple[tuple[AnalysingStep, int], ...]):
   return step2rate
 
 _STEP2RATE_AND_OFFSET: dict[AnalysingStep, tuple[float, float]] = _calculate_steps((
-  (AnalysingStep.OCR, 10),
-  (AnalysingStep.EXTRACT_SEQUENCE, 4),
-  (AnalysingStep.VERIFY_TEXT_PARAGRAPH, 3),
-  (AnalysingStep.VERIFY_FOOTNOTE_PARAGRAPH, 2),
-  (AnalysingStep.CORRECT_TEXT, 7),
-  (AnalysingStep.CORRECT_FOOTNOTE, 3),
-  (AnalysingStep.EXTRACT_META, 2),
+  (AnalysingStep.OCR, 30),
+  (AnalysingStep.EXTRACT_SEQUENCE, 10),
+  (AnalysingStep.VERIFY_TEXT_PARAGRAPH, 7),
+  (AnalysingStep.VERIFY_FOOTNOTE_PARAGRAPH, 5),
+  (AnalysingStep.CORRECT_TEXT, 12),
+  (AnalysingStep.CORRECT_FOOTNOTE, 7),
+  (AnalysingStep.EXTRACT_META, 3),
   (AnalysingStep.COLLECT_CONTENTS, 1),
-  (AnalysingStep.ANALYSE_CONTENTS, 6),
+  (AnalysingStep.ANALYSE_CONTENTS, 1),
   (AnalysingStep.MAPPING_CONTENTS, 1),
   (AnalysingStep.GENERATE_FOOTNOTES, 1),
+  (AnalysingStep.OUTPUT, 0),
 ))
 
 class _Reporter:
