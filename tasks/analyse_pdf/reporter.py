@@ -36,7 +36,7 @@ class Reporter:
   def __init__(self, context: Context, cache_dir_path: Path) -> None:
     self._context: Context = context
     self._state_file: Path = cache_dir_path / "progress.json"
-    self._scale_and_offset: tuple[float, float] = (0.0, 0.0)
+    self._scale_and_offset: tuple[float, float] = _STEP2RATE_AND_OFFSET[AnalysingStep.OCR]
     self._progress: int = 0
     self._percent: int = 0
     self._max_progress: int | None = None
@@ -50,10 +50,11 @@ class Reporter:
       self._report_percent(percent)
 
   def report_step(self, step: AnalysingStep) -> None:
-    self._scale_and_offset = _STEP2RATE_AND_OFFSET[step]
-    self._progress = 0
-    self._max_progress = None
-    self._sync_progress()
+    if _STEP2RATE_AND_OFFSET[step] != self._scale_and_offset:
+      self._scale_and_offset = _STEP2RATE_AND_OFFSET[step]
+      self._progress = 0
+      self._max_progress = None
+      self._sync_progress()
 
   def report_progress(self, progress: int, max_progress: int | None) -> None:
     self._progress = progress
@@ -71,7 +72,7 @@ class Reporter:
     self._report_percent(round(100.0 * progress))
 
   def _report_percent(self, percent: int):
-    if self._percent == percent:
+    if percent <= self._percent:
       return
     self._percent = percent
     self._context.report_progress(percent)
