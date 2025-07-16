@@ -1,13 +1,12 @@
-version: 0.2.7
+version: 0.2.8
 icon: ./icon.png
 scripts:
   bootstrap: |
-    poetry install --no-root
     if command -v nvidia-smi &> /dev/null; then
       pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
-      pip install onnxruntime-gpu==1.21.0 # 临时方案，等待修复 https://github.com/oomol-lab/pdf-craft/issues/85
+      poetry install --no-root --extras cuda
     else
-      pip install onnxruntime==1.21.0
+      poetry install --no-root --extras cpu
     fi
     pip uninstall opencv-python opencv-python-headless -y
     pip install opencv-python-headless==4.10.0.84
@@ -18,7 +17,7 @@ exclude_flow_dependencies:
   - dataclasses-json
 name: pdf-craft
 repository: https://github.com/oomol-flows/pdf-craft
-releaseNotes: fix bugs & update progress logic
+releaseNotes: fix bugs
 displayName: PDF craft
 description: PDF craft is a project that converts scanned PDF books into
   Markdown or EPUB formats using local AI.

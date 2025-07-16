@@ -7,12 +7,17 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
-dependencies = [
-    "pdf-craft (==0.2.5)",
-    "dataclasses-json (==0.6.7)"
-]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+dataclasses-json = "==0.6.7"
+pdf-craft = "0.2.6"
+onnxruntime = { version = "1.21.0", optional = true }
+onnxruntime-gpu = { version = "1.21.0", optional = true }
+
+[tool.poetry.extras]
+cpu = ["onnxruntime"]
+cuda = ["onnxruntime-gpu"]
