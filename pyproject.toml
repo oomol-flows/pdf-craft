@@ -8,10 +8,9 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 dependencies = [
-    "pdf-craft (==0.2.5)",
+    "pdf-craft (==0.2.6)",
     "dataclasses-json (==0.6.7)"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
