@@ -4,8 +4,6 @@ nodes:
     title: Analyse PDF
     node_id: analyse_pdf#1
     inputs_from:
-      - handle: model_dir
-        value:
       - handle: output_dir
         value:
       - handle: device

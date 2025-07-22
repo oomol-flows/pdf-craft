@@ -23,12 +23,6 @@ inputs_def:
           - Cloud
     value: cloud
     nullable: false
-  - handle: model_dir
-    json_schema:
-      type: string
-      ui:widget: dir
-    value:
-    nullable: true
   - handle: ocr_level
     json_schema:
       enum:
