@@ -1,0 +1,50 @@
+{
+  "nodes": {
+    "analyse_pdf#1": {
+      "contentWidth": 446.4504227920147,
+      "rfNode": {
+        "position": {
+          "x": 654.7406789705772,
+          "y": -295.4908933217693
+        }
+      }
+    },
+    "generate_epub#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": 1272.3784215461894,
+          "y": 435.2636879590297
+        }
+      }
+    }
+  },
+  "pseudoNodes": {
+    "input": {
+      "contentWidth": 497.2242303535614,
+      "rfNode": {
+        "position": {
+          "x": -37.36339982653948,
+          "y": -102.49089332176929
+        }
+      },
+      "sections": {
+        "subflowInput": {
+          "groupCollapsed": {
+            "LLM": true,
+            "options": true,
+            "OCR": true
+          }
+        }
+      }
+    },
+    "output": {
+      "rfNode": {
+        "position": {
+          "x": 1790.858629661752,
+          "y": 435.2636879590297
+        }
+      }
+    }
+  }
+}

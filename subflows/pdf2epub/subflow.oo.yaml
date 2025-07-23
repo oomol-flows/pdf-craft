@@ -1,0 +1,207 @@
+inputs_def:
+  - handle: pdf
+    json_schema:
+      type: string
+      ui:widget: file
+      ui:options:
+        filters:
+          - name: PDF
+            extensions:
+              - pdf
+    nullable: false
+    description: Input
+  - handle: epub
+    json_schema:
+      type: string
+      ui:widget: save
+      ui:options:
+        filters:
+          - name: EPUB
+            extensions:
+              - epub
+    nullable: true
+    value:
+  - group: OCR
+    collapsed: true
+  - handle: device
+    json_schema:
+      enum:
+        - cpu
+        - cuda
+        - cloud
+      ui:options:
+        labels:
+          - CPU
+          - CUDA
+          - Cloud
+    nullable: false
+    value: cloud
+  - handle: ocr_level
+    json_schema:
+      enum:
+        - once
+        - once_per_layout
+      ui:options:
+        labels:
+          - Once
+          - Once per Layout
+    nullable: false
+    value: once
+  - group: LLM
+    collapsed: true
+  - handle: window_tokens
+    json_schema:
+      type: integer
+    nullable: true
+    value:
+  - handle: threads_count
+    json_schema:
+      type: integer
+      minimum: 1
+    nullable: false
+    value: 1
+  - handle: retry_times
+    json_schema:
+      type: integer
+      minimum: 0
+    nullable: false
+    value: 5
+  - handle: retry_interval_seconds
+    json_schema:
+      type: number
+      minimum: 0
+    nullable: false
+    value: 1.5
+  - group: options
+    collapsed: true
+  - handle: correction
+    json_schema:
+      enum:
+        - off
+        - once
+        - detailed
+      ui:options:
+        labels:
+          - Off
+          - Once
+          - Detailed
+    nullable: false
+    value: once
+  - handle: extract_formula
+    json_schema:
+      type: boolean
+    nullable: false
+    value: false
+  - handle: extract_table
+    json_schema:
+      type: boolean
+    nullable: false
+    value: false
+  - handle: llm
+    json_schema:
+      ui:options:
+        title: Model
+      ui:widget: llm::model
+    nullable: false
+    value:
+      model: deepseek-chat
+      temperature: 1
+      top_p: 0.8
+      max_tokens: 4096
+outputs_def:
+  - handle: saved_path
+    json_schema:
+      type: string
+      ui:widget: save
+      ui:options:
+        filters:
+          - name: EPUB
+            extensions:
+              - epub
+    nullable: false
+    description: Output
+nodes:
+  - node_id: analyse_pdf#1
+    title: "Analyse PDF #1"
+    inputs_from:
+      - handle: pdf
+        from_flow:
+          - input_handle: pdf
+      - handle: output_dir
+        value: null
+      - handle: device
+        value: cloud
+        from_flow:
+          - input_handle: device
+      - handle: ocr_level
+        value: once
+        from_flow:
+          - input_handle: ocr_level
+      - handle: window_tokens
+        value: null
+        from_flow:
+          - input_handle: window_tokens
+      - handle: threads_count
+        value: 1
+        from_flow:
+          - input_handle: threads_count
+      - handle: retry_times
+        value: 5
+        from_flow:
+          - input_handle: retry_times
+      - handle: retry_interval_seconds
+        value: 1.5
+        from_flow:
+          - input_handle: retry_interval_seconds
+      - handle: correction
+        value: once
+        from_flow:
+          - input_handle: correction
+      - handle: extract_formula
+        value: false
+        from_flow:
+          - input_handle: extract_formula
+      - handle: extract_table
+        value: false
+        from_flow:
+          - input_handle: extract_table
+      - handle: llm
+        value:
+          model: deepseek-chat
+          temperature: 1
+          top_p: 0.8
+          max_tokens: 4096
+        from_flow:
+          - input_handle: llm
+    task: self::analyse_pdf
+    progressWeight: 95
+  - node_id: generate_epub#1
+    title: "Generate EPUB #1"
+    inputs_from:
+      - handle: analysed_dir
+        from_node:
+          - node_id: analyse_pdf#1
+            output_handle: output_dir
+      - handle: epub_file_path
+        value: null
+        from_flow:
+          - input_handle: epub
+      - handle: latex
+        value: true
+        from_flow:
+          - input_handle: extract_formula
+      - handle: table
+        value: true
+        from_flow:
+          - input_handle: extract_table
+        from_node:
+          []
+    task: self::generate_epub
+    progressWeight: 5
+title: PDF to EPUB
+icon: ":twemoji:blue-book:"
+outputs_from:
+  - handle: saved_path
+    from_node:
+      - node_id: generate_epub#1
+        output_handle: epub_file_path
