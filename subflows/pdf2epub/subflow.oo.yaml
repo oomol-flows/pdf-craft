@@ -134,6 +134,7 @@ inputs_def:
     nullable: false
 outputs_def:
   - handle: saved_path
+    description: Converted EPUB file path.
     json_schema:
       type: string
       ui:widget: save
@@ -143,7 +144,6 @@ outputs_def:
             extensions:
               - epub
     nullable: false
-    description: Output
 nodes:
   - node_id: analyse_pdf#1
     title: "Analyse PDF #1"

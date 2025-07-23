@@ -10,6 +10,7 @@ inputs_def:
             extensions:
               - pdf
   - handle: markdown
+    description: MarkDown file save path, if not filled in, a default path will be specified
     json_schema:
       type: string
       ui:widget: save
@@ -18,6 +19,8 @@ inputs_def:
   - group: OCR
     collapsed: true
   - handle: device
+    description: how to perform OCR, using CPU? using CUDA hardware acceleration? or
+      uploading to the cloud?
     json_schema:
       enum:
         - cpu
@@ -30,6 +33,8 @@ inputs_def:
           - Cloud
     value: cloud
   - handle: ocr_level
+    description: Should we perform OCR only once per page, or perform OCR multiple
+      times to avoid missing some text?
     json_schema:
       enum:
         - once
@@ -39,23 +44,32 @@ inputs_def:
           - Once
           - Once per Layout
     value: once
+  - group: options
+    collapsed: true
   - handle: extract_formula
+    description: Whether to extract formulas in the page. If enabled, the formulas
+      will be parsed into LATEX format. If disabled, the formulas will be
+      treated as static images.
     json_schema:
       type: boolean
     value: false
   - handle: extract_table
+    description: Whether to extract the table in the page. If enabled, it will be
+      recognized as HTML format, if disabled, it will be displayed as a static
+      image.
     json_schema:
       type: boolean
     value: false
-  - group: options
-    collapsed: true
   - handle: assets_dir_name
+    description: The name of the folder where the resource files such as images
+      referenced by the markdown file are stored. Enter a relative address for
+      the markdown file.
     json_schema:
       type: string
     value: images
 outputs_def:
   - handle: saved_path
-    description: Output
+    description: Converted MarkDown file path.
     json_schema:
       type: string
       ui:widget: save
