@@ -3,16 +3,16 @@ import typing
 from oocana import LLMModelOptions
 class Inputs(typing.TypedDict):
     pdf: str
+    output_dir: str | None
     device: typing.Literal["cpu", "cuda", "cloud"]
     ocr_level: typing.Literal["once", "once_per_layout"]
-    correction: typing.Literal["off", "once", "detailed"]
-    extract_formula: bool
-    extract_table: bool
     window_tokens: int | None
     threads_count: int
     retry_times: int
     retry_interval_seconds: float
-    output_dir: str | None
+    correction: typing.Literal["off", "once", "detailed"]
+    extract_formula: bool
+    extract_table: bool
     llm: LLMModelOptions
 class Outputs(typing.TypedDict):
     output_dir: str

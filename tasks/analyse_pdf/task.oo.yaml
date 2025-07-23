@@ -10,6 +10,14 @@ inputs_def:
             extensions:
               - pdf
     nullable: false
+  - handle: output_dir
+    json_schema:
+      type: string
+      ui:widget: dir
+    value:
+    nullable: true
+  - group: OCR
+    collapsed: true
   - handle: device
     json_schema:
       enum:
@@ -34,26 +42,8 @@ inputs_def:
           - Once per Layout
     value: once
     nullable: false
-  - handle: correction
-    json_schema:
-      enum:
-        - off
-        - once
-        - detailed
-      ui:options:
-        labels:
-          - Off
-          - Once
-          - Detailed
-    value: once
-  - handle: extract_formula
-    json_schema:
-      type: boolean
-    value: false
-  - handle: extract_table
-    json_schema:
-      type: boolean
-    value: false
+  - group: LLM
+    collapsed: true
   - handle: window_tokens
     json_schema:
       type: integer
@@ -76,12 +66,28 @@ inputs_def:
       minimum: 0
     value: 1.5
     nullable: false
-  - handle: output_dir
+  - group: options
+    collapsed: true
+  - handle: correction
     json_schema:
-      type: string
-      ui:widget: dir
-    value:
-    nullable: true
+      enum:
+        - off
+        - once
+        - detailed
+      ui:options:
+        labels:
+          - Off
+          - Once
+          - Detailed
+    value: once
+  - handle: extract_formula
+    json_schema:
+      type: boolean
+    value: false
+  - handle: extract_table
+    json_schema:
+      type: boolean
+    value: false
   - handle: llm
     json_schema:
       ui:options:
@@ -99,7 +105,7 @@ outputs_def:
       type: string
       ui:widget: dir
 ui:
-  default_width: 575.9100785537335
+  default_width: 446.4504227920147
 executor:
   name: python
   options:

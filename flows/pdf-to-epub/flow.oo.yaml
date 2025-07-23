@@ -41,8 +41,8 @@ nodes:
         from_node:
           - node_id: analyse_pdf#1
             output_handle: output_dir
-      - handle: render_latex
+      - handle: latex
         value: true
-      - handle: render_table
+      - handle: table
         value: true
 title: PDF to EPUB

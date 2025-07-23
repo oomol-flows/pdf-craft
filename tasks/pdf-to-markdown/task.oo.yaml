@@ -9,6 +9,14 @@ inputs_def:
           - name: PDF
             extensions:
               - pdf
+  - handle: output_file
+    json_schema:
+      type: string
+      ui:widget: save
+    value:
+    nullable: true
+  - group: OCR
+    collapsed: true
   - handle: device
     json_schema:
       enum:
@@ -39,12 +47,8 @@ inputs_def:
     json_schema:
       type: boolean
     value: false
-  - handle: output_file
-    json_schema:
-      type: string
-      ui:widget: save
-    value:
-    nullable: true
+  - group: options
+    collapsed: true
   - handle: assets_dir_name
     json_schema:
       type: string
@@ -63,7 +67,7 @@ outputs_def:
               - markdown
               - mdown
 ui:
-  default_width: 456.2563288935522
+  default_width: 455.31580562188833
 executor:
   name: python
   options:

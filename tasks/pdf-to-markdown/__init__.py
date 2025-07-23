@@ -2,11 +2,11 @@
 import typing
 class Inputs(typing.TypedDict):
     pdf: str
+    output_file: str | None
     device: typing.Literal["cpu", "cuda", "cloud"]
     ocr_level: typing.Literal["once", "once_per_layout"]
     extract_formula: bool
     extract_table: bool
-    output_file: str | None
     assets_dir_name: str
 class Outputs(typing.TypedDict):
     output_file: str
