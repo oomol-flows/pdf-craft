@@ -1,11 +1,10 @@
 {
   "nodes": {
-    "analyse_pdf#1": {
-      "contentWidth": 476.3019694317175,
+    "pdf2epub#1": {
       "rfNode": {
         "position": {
-          "x": -69.23520205699586,
-          "y": 205.1691003856867
+          "x": 257,
+          "y": 172.00130462646484
         }
       },
       "sections": {
@@ -18,18 +17,19 @@
         }
       }
     },
-    "generate_epub#1": {
-      "contentWidth": 450,
+    "pdf-to-markdown#2": {
+      "contentWidth": 411.70825911262096,
       "rfNode": {
         "position": {
-          "x": 468.9811037981092,
-          "y": 205.1691003856867
+          "x": 796,
+          "y": 172.00130462646484
         }
       },
       "sections": {
         "inputs": {
           "groupCollapsed": {
-            "render": true
+            "OCR": true,
+            "options": true
           }
         }
       }

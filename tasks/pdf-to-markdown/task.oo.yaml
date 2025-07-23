@@ -67,7 +67,7 @@ outputs_def:
               - markdown
               - mdown
 ui:
-  default_width: 455.31580562188833
+  default_width: 411.70825911262096
 executor:
   name: python
   options:
