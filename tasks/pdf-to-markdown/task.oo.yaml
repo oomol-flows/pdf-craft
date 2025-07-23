@@ -9,7 +9,7 @@ inputs_def:
           - name: PDF
             extensions:
               - pdf
-  - handle: output_file
+  - handle: markdown
     json_schema:
       type: string
       ui:widget: save
@@ -54,7 +54,7 @@ inputs_def:
       type: string
     value: images
 outputs_def:
-  - handle: output_file
+  - handle: saved_path
     description: Output
     json_schema:
       type: string
@@ -75,3 +75,4 @@ executor:
     entry: __init__.py
 title: PDF to Markdown
 icon: ":twemoji:bookmark-tabs:"
+description: use OCR to recognize scanned PDF files and convert them into Markdown files.
