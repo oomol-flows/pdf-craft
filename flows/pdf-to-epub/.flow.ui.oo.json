@@ -1,11 +1,20 @@
 {
   "nodes": {
     "analyse_pdf#1": {
-      "contentWidth": 573.8004385194448,
+      "contentWidth": 476.3019694317175,
       "rfNode": {
         "position": {
           "x": -69.23520205699586,
           "y": 205.1691003856867
+        }
+      },
+      "sections": {
+        "inputs": {
+          "groupCollapsed": {
+            "OCR": true,
+            "LLM": true,
+            "options": true
+          }
         }
       }
     },
@@ -13,8 +22,15 @@
       "contentWidth": 450,
       "rfNode": {
         "position": {
-          "x": 574.4089039260838,
+          "x": 468.9811037981092,
           "y": 205.1691003856867
+        }
+      },
+      "sections": {
+        "inputs": {
+          "groupCollapsed": {
+            "render": true
+          }
         }
       }
     }

@@ -4,14 +4,6 @@ inputs_def:
     json_schema:
       type: string
       ui:widget: dir
-  - handle: render_latex
-    json_schema:
-      type: boolean
-    value: true
-  - handle: render_table
-    json_schema:
-      type: boolean
-    value: true
   - handle: epub_file_path
     json_schema:
       type: string
@@ -23,6 +15,16 @@ inputs_def:
               - epub
     value:
     nullable: true
+  - group: render
+    collapsed: true
+  - handle: render_latex
+    json_schema:
+      type: boolean
+    value: true
+  - handle: render_table
+    json_schema:
+      type: boolean
+    value: true
 outputs_def:
   - handle: epub_file_path
     description: Output

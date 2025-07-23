@@ -2,9 +2,9 @@
 import typing
 class Inputs(typing.TypedDict):
     analysed_dir: str
+    epub_file_path: str | None
     render_latex: bool
     render_table: bool
-    epub_file_path: str | None
 class Outputs(typing.TypedDict):
     epub_file_path: str
 #endregion

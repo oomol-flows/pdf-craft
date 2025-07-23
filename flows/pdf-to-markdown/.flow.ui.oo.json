@@ -7,6 +7,14 @@
           "x": 440.1614270532606,
           "y": 319.56912417691683
         }
+      },
+      "sections": {
+        "inputs": {
+          "groupCollapsed": {
+            "OCR": true,
+            "options": true
+          }
+        }
       }
     },
     "markdown_file_preview#2": {
