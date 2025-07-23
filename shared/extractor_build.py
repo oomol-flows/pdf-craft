@@ -2,7 +2,6 @@ import torch
 
 from typing import TypedDict, Literal
 from pathlib import Path
-from tempfile import mkdtemp
 from oocana import Context
 from pdf_craft import create_pdf_page_extractor, OCRLevel, PDFPageExtractor, ExtractedTableFormat
 from .cloud_extractor import CloudExtractor
@@ -10,7 +9,6 @@ from .cloud_extractor import CloudExtractor
 
 class BuildParams(TypedDict):
   device: Literal["cpu", "cuda", "cloud"]
-  model_dir: str | None
   ocr_level: Literal["once", "once_per_layout"]
   extract_formula: bool
 
@@ -21,12 +19,8 @@ def build_extractor(
   ) -> PDFPageExtractor:
 
   device = params["device"]
-  model_dir: str | None = params["model_dir"]
   ocr_level_value = params["ocr_level"]
   extract_formula = params["extract_formula"]
-
-  if model_dir is None:
-    model_dir = mkdtemp()
 
   ocr_level: OCRLevel
   if ocr_level_value == "once":
@@ -55,7 +49,7 @@ def build_extractor(
     return create_pdf_page_extractor(
       device=device,
       ocr_level=ocr_level,
-      model_dir_path=Path(model_dir),
+      model_dir_path=Path(context.pkg_data_dir),
       extract_formula=extract_formula,
       extract_table_format=extract_table_format,
     )

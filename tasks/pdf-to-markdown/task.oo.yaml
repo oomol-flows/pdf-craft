@@ -21,12 +21,6 @@ inputs_def:
           - CUDA
           - Cloud
     value: cloud
-  - handle: model_dir
-    json_schema:
-      type: string
-      ui:widget: dir
-    value:
-    nullable: true
   - handle: ocr_level
     json_schema:
       enum:
