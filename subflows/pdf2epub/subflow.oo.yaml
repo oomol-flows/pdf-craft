@@ -1,6 +1,6 @@
 inputs_def:
   - handle: pdf
-    description: Input
+    description: Scanned PDF file to be converted
     json_schema:
       type: string
       ui:widget: file
