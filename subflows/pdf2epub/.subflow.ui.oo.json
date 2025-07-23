@@ -31,9 +31,9 @@
       "sections": {
         "subflowInput": {
           "groupCollapsed": {
+            "OCR": true,
             "LLM": true,
-            "options": true,
-            "OCR": true
+            "options": true
           }
         }
       }

@@ -1,5 +1,6 @@
 inputs_def:
   - handle: pdf
+    description: Input
     json_schema:
       type: string
       ui:widget: file
@@ -9,8 +10,8 @@ inputs_def:
             extensions:
               - pdf
     nullable: false
-    description: Input
   - handle: epub
+    description: EPUB file save path, if not filled in, a default path will be specified
     json_schema:
       type: string
       ui:widget: save
@@ -19,11 +20,13 @@ inputs_def:
           - name: EPUB
             extensions:
               - epub
-    nullable: true
     value:
+    nullable: true
   - group: OCR
     collapsed: true
   - handle: device
+    description: how to perform OCR, using CPU? using CUDA hardware acceleration? or
+      uploading to the cloud?
     json_schema:
       enum:
         - cpu
@@ -34,9 +37,11 @@ inputs_def:
           - CPU
           - CUDA
           - Cloud
-    nullable: false
     value: cloud
+    nullable: false
   - handle: ocr_level
+    description: Should we perform OCR only once per page, or perform OCR multiple
+      times to avoid missing some text?
     json_schema:
       enum:
         - once
@@ -45,36 +50,49 @@ inputs_def:
         labels:
           - Once
           - Once per Layout
-    nullable: false
     value: once
+    nullable: false
   - group: LLM
     collapsed: true
   - handle: window_tokens
+    description: The entire book will be split into many segments and submitted to
+      LLM in batches. this number is used to limit the number of tokens in each
+      segment.
     json_schema:
       type: integer
-    nullable: true
     value:
+    nullable: true
   - handle: threads_count
+    description: The number of threads opened at the same time to initiate requests
+      to LLM, the more threads, the faster the analysis speed.
     json_schema:
       type: integer
       minimum: 1
+    value: 4
     nullable: false
-    value: 1
   - handle: retry_times
+    description: The number of retries after an LLM request fails is limited. If a
+      request exceeds this number, an error will be reported and the request
+      will be exited.
     json_schema:
       type: integer
       minimum: 0
-    nullable: false
     value: 5
+    nullable: false
   - handle: retry_interval_seconds
+    description: How long (in seconds) after a failed LLM request starts the next retry
     json_schema:
       type: number
       minimum: 0
-    nullable: false
     value: 1.5
+    nullable: false
   - group: options
     collapsed: true
   - handle: correction
+    description: For the results of OCR scanning, LLM is used to correct the text.
+      If set to "off", no correction will be made; if set to "once", only one
+      correction will be made; if set to "detailed", the correction will be
+      repeated until LLM considers the final result to be of sufficient quality.
     json_schema:
       enum:
         - off
@@ -85,31 +103,38 @@ inputs_def:
           - Off
           - Once
           - Detailed
-    nullable: false
     value: once
+    nullable: false
   - handle: extract_formula
+    description: Whether to extract formulas in the page. If enabled, the formulas
+      will be parsed into LATEX format. If disabled, the formulas will be
+      treated as static images.
     json_schema:
       type: boolean
-    nullable: false
     value: false
+    nullable: false
   - handle: extract_table
+    description: Whether to extract the table in the page. If enabled, it will be
+      recognized as HTML format, if disabled, it will be displayed as a static
+      image.
     json_schema:
       type: boolean
-    nullable: false
     value: false
+    nullable: false
   - handle: llm
     json_schema:
       ui:options:
         title: Model
       ui:widget: llm::model
-    nullable: false
     value:
       model: deepseek-chat
       temperature: 1
       top_p: 0.8
       max_tokens: 4096
+    nullable: false
 outputs_def:
   - handle: saved_path
+    description: Converted EPUB file path.
     json_schema:
       type: string
       ui:widget: save
@@ -119,7 +144,6 @@ outputs_def:
             extensions:
               - epub
     nullable: false
-    description: Output
 nodes:
   - node_id: analyse_pdf#1
     title: "Analyse PDF #1"
@@ -205,3 +229,6 @@ outputs_from:
     from_node:
       - node_id: generate_epub#1
         output_handle: epub_file_path
+description: The scanned PDF file is recognized by OCR, and the book structure
+  is analyzed by LLM, and it is converted into an EPUB file while retaining
+  these structures.
