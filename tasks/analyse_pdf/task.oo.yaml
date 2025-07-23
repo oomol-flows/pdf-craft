@@ -53,7 +53,7 @@ inputs_def:
     json_schema:
       type: integer
       minimum: 1
-    value: 1
+    value: 4
   - handle: retry_times
     json_schema:
       type: integer

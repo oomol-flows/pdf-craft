@@ -28,8 +28,8 @@
       "sections": {
         "inputs": {
           "groupCollapsed": {
-            "OCR": true,
-            "options": true
+            "options": true,
+            "OCR": true
           }
         }
       }

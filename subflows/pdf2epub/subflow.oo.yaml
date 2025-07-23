@@ -1,5 +1,6 @@
 inputs_def:
   - handle: pdf
+    description: Input
     json_schema:
       type: string
       ui:widget: file
@@ -9,7 +10,6 @@ inputs_def:
             extensions:
               - pdf
     nullable: false
-    description: Input
   - handle: epub
     json_schema:
       type: string
@@ -19,8 +19,8 @@ inputs_def:
           - name: EPUB
             extensions:
               - epub
-    nullable: true
     value:
+    nullable: true
   - group: OCR
     collapsed: true
   - handle: device
@@ -34,8 +34,8 @@ inputs_def:
           - CPU
           - CUDA
           - Cloud
-    nullable: false
     value: cloud
+    nullable: false
   - handle: ocr_level
     json_schema:
       enum:
@@ -45,33 +45,33 @@ inputs_def:
         labels:
           - Once
           - Once per Layout
-    nullable: false
     value: once
+    nullable: false
   - group: LLM
     collapsed: true
   - handle: window_tokens
     json_schema:
       type: integer
-    nullable: true
     value:
+    nullable: true
   - handle: threads_count
     json_schema:
       type: integer
       minimum: 1
+    value: 4
     nullable: false
-    value: 1
   - handle: retry_times
     json_schema:
       type: integer
       minimum: 0
-    nullable: false
     value: 5
+    nullable: false
   - handle: retry_interval_seconds
     json_schema:
       type: number
       minimum: 0
-    nullable: false
     value: 1.5
+    nullable: false
   - group: options
     collapsed: true
   - handle: correction
@@ -85,29 +85,29 @@ inputs_def:
           - Off
           - Once
           - Detailed
-    nullable: false
     value: once
+    nullable: false
   - handle: extract_formula
     json_schema:
       type: boolean
-    nullable: false
     value: false
+    nullable: false
   - handle: extract_table
     json_schema:
       type: boolean
-    nullable: false
     value: false
+    nullable: false
   - handle: llm
     json_schema:
       ui:options:
         title: Model
       ui:widget: llm::model
-    nullable: false
     value:
       model: deepseek-chat
       temperature: 1
       top_p: 0.8
       max_tokens: 4096
+    nullable: false
 outputs_def:
   - handle: saved_path
     json_schema:
