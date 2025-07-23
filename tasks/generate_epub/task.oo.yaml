@@ -16,12 +16,12 @@ inputs_def:
     value:
     nullable: true
   - group: render
-    collapsed: true
-  - handle: render_latex
+    collapsed: false
+  - handle: latex
     json_schema:
       type: boolean
     value: true
-  - handle: render_table
+  - handle: table
     json_schema:
       type: boolean
     value: true

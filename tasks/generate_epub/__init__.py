@@ -3,8 +3,8 @@ import typing
 class Inputs(typing.TypedDict):
     analysed_dir: str
     epub_file_path: str | None
-    render_latex: bool
-    render_table: bool
+    latex: bool
+    table: bool
 class Outputs(typing.TypedDict):
     epub_file_path: str
 #endregion
@@ -20,9 +20,9 @@ def main(params: Inputs, context: Context) -> Outputs:
   latex_render: LaTeXRender = LaTeXRender.CLIPPING
   table_render: TableRender = TableRender.CLIPPING
 
-  if params["render_latex"]:
+  if params["latex"]:
     latex_render = LaTeXRender.MATHML
-  if params["render_table"]:
+  if params["table"]:
     table_render = TableRender.HTML
 
   if epub_file_path is None:
