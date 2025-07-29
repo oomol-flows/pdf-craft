@@ -198,7 +198,7 @@ nodes:
         from_flow:
           - input_handle: llm
     task: self::analyse_pdf
-    progressWeight: 95
+    progress_weight: 95
   - node_id: generate_epub#1
     title: "Generate EPUB #1"
     inputs_from:
@@ -221,7 +221,7 @@ nodes:
         from_node:
           []
     task: self::generate_epub
-    progressWeight: 5
+    progress_weight: 5
 title: PDF to EPUB
 icon: ":twemoji:blue-book:"
 outputs_from:
