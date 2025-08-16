@@ -125,12 +125,16 @@ inputs_def:
     json_schema:
       ui:options:
         title: Model
+        tags:
+          - text
+        excludeTags:
+          - thinking
       ui:widget: llm::model
     value:
       model: deepseek-chat
-      temperature: 1
-      top_p: 0.8
-      max_tokens: 4096
+      temperature: 0.8
+      top_p: 0.6
+      max_tokens: 8192
     nullable: false
 outputs_def:
   - handle: saved_path
