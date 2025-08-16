@@ -1,18 +1,18 @@
 {
   "nodes": {
-    "pdf2epub#1": {
+    "pdf2epub#2": {
       "rfNode": {
         "position": {
-          "x": 257,
-          "y": 172.00130462646484
+          "x": 851.539200659867,
+          "y": 1090.6539116369956
         }
       },
       "sections": {
         "inputs": {
           "groupCollapsed": {
             "OCR": true,
-            "LLM": true,
-            "options": true
+            "options": true,
+            "LLM": true
           }
         }
       }
@@ -21,15 +21,15 @@
       "contentWidth": 411.70825911262096,
       "rfNode": {
         "position": {
-          "x": 796,
-          "y": 172.00130462646484
+          "x": 1330.049608431224,
+          "y": 1090.6539116369956
         }
       },
       "sections": {
         "inputs": {
           "groupCollapsed": {
-            "options": true,
-            "OCR": true
+            "OCR": true,
+            "options": true
           }
         }
       }

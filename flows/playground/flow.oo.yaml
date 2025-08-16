@@ -1,6 +1,6 @@
 title: Playground
 nodes:
-  - node_id: pdf2epub#1
+  - node_id: pdf2epub#2
     title: "PDF to EPUB #1"
     inputs_from:
       - handle: pdf
@@ -13,7 +13,7 @@ nodes:
       - handle: window_tokens
         value: null
       - handle: threads_count
-        value: 1
+        value: 4
       - handle: retry_times
         value: 5
       - handle: retry_interval_seconds
@@ -27,12 +27,12 @@ nodes:
       - handle: llm
         value:
           model: deepseek-chat
-          temperature: 1
-          top_p: 0.8
-          max_tokens: 4096
+          temperature: 0.8
+          top_p: 0.6
+          max_tokens: 8192
     subflow: self::pdf2epub
   - node_id: pdf-to-markdown#2
-    title: "PDF to Markdown #2"
+    title: "PDF to Markdown #1"
     inputs_from:
       - handle: pdf
       - handle: markdown
