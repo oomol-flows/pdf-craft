@@ -26,25 +26,40 @@ nodes:
         value: false
       - handle: llm
         value:
-          model: deepseek-chat
-          temperature: 0.8
-          top_p: 0.6
+          model: deepseek-v3-250324
+          temperature: 0.1
+          top_p: 1
           max_tokens: 8192
     subflow: self::pdf2epub
-  - node_id: pdf-to-markdown#2
-    title: "PDF to Markdown #1"
+  - node_id: pdf2epub#1
+    title: "PDF to EPUB #1"
     inputs_from:
       - handle: pdf
-      - handle: markdown
+        value: /oomol-driver/oomol-storage/oopilot-instructions.pdf
+      - handle: epub
         value: null
       - handle: device
         value: cloud
       - handle: ocr_level
         value: once
+      - handle: window_tokens
+        value: null
+      - handle: threads_count
+        value: 4
+      - handle: retry_times
+        value: 5
+      - handle: retry_interval_seconds
+        value: 1.5
+      - handle: correction
+        value: once
       - handle: extract_formula
         value: false
       - handle: extract_table
         value: false
-      - handle: assets_dir_name
-        value: images
-    task: self::pdf-to-markdown
+      - handle: llm
+        value:
+          model: deepseek-chat
+          temperature: 0.8
+          top_p: 0.6
+          max_tokens: 8192
+    subflow: self::pdf2epub

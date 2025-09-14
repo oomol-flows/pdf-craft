@@ -17,18 +17,18 @@
         }
       }
     },
-    "pdf-to-markdown#2": {
-      "contentWidth": 411.70825911262096,
+    "pdf2epub#1": {
       "rfNode": {
         "position": {
-          "x": 1330.049608431224,
-          "y": 1090.6539116369956
+          "x": 611,
+          "y": 113
         }
       },
       "sections": {
         "inputs": {
           "groupCollapsed": {
             "OCR": true,
+            "LLM": true,
             "options": true
           }
         }
