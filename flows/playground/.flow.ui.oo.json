@@ -20,17 +20,8 @@
     "pdf2epub#1": {
       "rfNode": {
         "position": {
-          "x": 611,
-          "y": 113
-        }
-      },
-      "sections": {
-        "inputs": {
-          "groupCollapsed": {
-            "OCR": true,
-            "LLM": true,
-            "options": true
-          }
+          "x": 1287.539200659867,
+          "y": 1090.6539116369956
         }
       }
     }
