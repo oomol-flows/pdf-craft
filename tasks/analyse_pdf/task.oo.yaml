@@ -145,4 +145,4 @@ icon: ":fa6-solid:file-pdf:#F14C4C:"
 description: Analyse the scanned PDF file, use OCR to recognize the content of
   the book page, and use LLM to analyze the book structure and extract the
   necessary information.
-private: true
+private: false

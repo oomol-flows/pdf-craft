@@ -51,4 +51,4 @@ executor:
 title: Generate EPUB
 icon: ":twemoji:blue-book:"
 description: Convert PDF analysis results (folders) into EPUB files.
-private: true
+private: false

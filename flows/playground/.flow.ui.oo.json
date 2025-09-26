@@ -11,8 +11,8 @@
         "inputs": {
           "groupCollapsed": {
             "OCR": true,
-            "options": true,
-            "LLM": true
+            "LLM": true,
+            "options": true
           }
         }
       }
@@ -20,8 +20,17 @@
     "pdf2epub#1": {
       "rfNode": {
         "position": {
-          "x": 1287.539200659867,
+          "x": 1388.660597635744,
           "y": 1090.6539116369956
+        }
+      },
+      "sections": {
+        "inputs": {
+          "groupCollapsed": {
+            "OCR": true,
+            "LLM": true,
+            "options": true
+          }
         }
       }
     }

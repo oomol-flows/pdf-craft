@@ -35,7 +35,6 @@ nodes:
     title: "PDF to EPUB #1"
     inputs_from:
       - handle: pdf
-        value: /oomol-driver/oomol-storage/oopilot-instructions.pdf
       - handle: epub
         value: null
       - handle: device
