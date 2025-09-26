@@ -14,7 +14,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 dataclasses-json = "==0.6.7"
-pdf-craft = "0.2.7"
+pdf-craft = "0.2.8"
 onnxruntime = { version = "1.21.0", optional = true }
 onnxruntime-gpu = { version = "1.21.0", optional = true }
 
