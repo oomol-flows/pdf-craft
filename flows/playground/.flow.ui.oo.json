@@ -1,10 +1,10 @@
 {
   "nodes": {
-    "pdf2epub#2": {
+    "pdf2epub#1": {
       "rfNode": {
         "position": {
-          "x": 851.539200659867,
-          "y": 1090.6539116369956
+          "x": 917.9950981220491,
+          "y": 1161.1059981392825
         }
       },
       "sections": {
@@ -17,18 +17,18 @@
         }
       }
     },
-    "pdf2epub#1": {
+    "pdf-to-markdown#1": {
+      "contentWidth": 411.70825911262096,
       "rfNode": {
         "position": {
-          "x": 1388.660597635744,
-          "y": 1090.6539116369956
+          "x": 1458.0263883549235,
+          "y": 1161.1059981392825
         }
       },
       "sections": {
         "inputs": {
           "groupCollapsed": {
             "OCR": true,
-            "LLM": true,
             "options": true
           }
         }
