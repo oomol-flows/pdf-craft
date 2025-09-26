@@ -1,4 +1,4 @@
-version: 0.2.14
+version: 0.2.15
 icon: ./icon.png
 scripts:
   bootstrap: |
@@ -17,6 +17,6 @@ exclude_flow_dependencies:
   - dataclasses-json
 name: pdf-craft
 repository: https://github.com/oomol-flows/pdf-craft
-releaseNotes: add layer
+releaseNotes: upgrade dependencies to fix bug
 displayName: PDF craft
 description: "%pdf-craft-is-a-project-that-converts-scanned-pdf-books-into-mark%"
